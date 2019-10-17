@@ -29,15 +29,25 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import java.util.Locale;
+
 
 /**
  * This file illustrates the concept of driving a path based on Gyro heading and encoder counts.
@@ -78,7 +88,7 @@ public class SkystoneAutoGyro extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use a Pushbot's hardware
-    ModernRoboticsI2cGyro   gyro    = null;                    // Additional Gyro device
+    BNO055IMU   gyro    = null;                    // Additional Gyro device
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
@@ -95,7 +105,13 @@ public class SkystoneAutoGyro extends LinearOpMode {
     static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
     static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
 
+    // The IMU sensor object
+    BNO055IMU imu;
 
+    // State used for updating telemetry
+    Orientation angles;
+    Acceleration gravity;
+    
     @Override
     public void runOpMode() {
 
@@ -104,8 +120,10 @@ public class SkystoneAutoGyro extends LinearOpMode {
          * The init() method of the hardware class does most of the work here
          */
         robot.init(hardwareMap);
-        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
-
+        gyro = (BNO055IMU)hardwareMap.gyroSensor.get("gyro");
+        gyro = hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters parameters  = new BNO055IMU.Parameters();
+        gyro.initialize(parameters);
         // Ensure the robot it stationary, then reset the encoders and calibrate the gyro.
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -114,10 +132,16 @@ public class SkystoneAutoGyro extends LinearOpMode {
         telemetry.addData(">", "Calibrating Gyro");    //
         telemetry.update();
 
-        gyro.calibrate();
+        parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
         // make sure the gyro is calibrated before continuing
-        while (!isStopRequested() && gyro.isCalibrating())  {
+        while (!isStopRequested() && gyro.isGyroCalibrated())  {
             sleep(50);
             idle();
         }
@@ -130,16 +154,16 @@ public class SkystoneAutoGyro extends LinearOpMode {
 
         // Wait for the game to start (Display Gyro value), and reset gyro before we move..
         while (!isStarted()) {
-            telemetry.addData(">", "Robot Heading = %d", gyro.getIntegratedZValue());
+            telemetry.addData(">", "Robot Heading = %d", gyro.getAngularOrientation());
             telemetry.update();
         }
 
-        gyro.resetZAxisIntegrator();
-
+        gyro.getAngularOrientation();
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         // Put a hold after each turn
-        gyroDrive(DRIVE_SPEED, 48.0, 0.0);    // Drive FWD 48 inches
+
+        gyroDrive( DRIVE_SPEED, 48.0, 0.0);    // Drive FWD 48 inches
         gyroTurn( TURN_SPEED, -45.0);         // Turn  CCW to -45 Degrees
         gyroHold( TURN_SPEED, -45.0, 0.5);    // Hold -45 Deg heading for a 1/2 second
         gyroDrive(DRIVE_SPEED, 12.0, -45.0);  // Drive FWD 12 inches at 45 degrees
@@ -346,7 +370,7 @@ public class SkystoneAutoGyro extends LinearOpMode {
         double robotError;
 
         // calculate error in -179 to +180 range  (
-        robotError = targetAngle - gyro.getIntegratedZValue();
+        robotError = targetAngle - gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
         while (robotError > 180)  robotError -= 360;
         while (robotError <= -180) robotError += 360;
         return robotError;

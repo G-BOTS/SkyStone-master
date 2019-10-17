@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -41,6 +42,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+
+import static com.google.blocks.ftcrobotcontroller.hardware.HardwareType.BNO055IMU;
 
 /*
  * This is an example LinearOpMode that shows how to use the Modern Robotics Gyro.
@@ -76,8 +79,8 @@ public class SensorMRGyro extends LinearOpMode {
 
     // Get a reference to a Modern Robotics gyro object. We use several interfaces
     // on this object to illustrate which interfaces support which functionality.
-    modernRoboticsI2cGyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
-    gyro = (IntegratingGyroscope)modernRoboticsI2cGyro;
+   // BNO055IMU = hardwareMap.get(com.qualcomm.hardware.bosch.BNO055IMU.class, "gyro");
+   // gyro = (IntegratingGyroscope)BNO055IMU;
     // If you're only interested int the IntegratingGyroscope interface, the following will suffice.
     // gyro = hardwareMap.get(IntegratingGyroscope.class, "gyro");
     // A similar approach will work for the Gyroscope interface, if that's all you need.

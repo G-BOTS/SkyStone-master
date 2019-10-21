@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Autonomous
 //@Disabled
 
-public class PullbackFoundation extends LinearOpMode {
+public class GetBlock_Red extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -55,30 +55,30 @@ public class PullbackFoundation extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,   -27, -27, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.armDrive.setTargetPosition(200);
+        encoderDrive(DRIVE_SPEED,   -20.75, -20.75, 4.0);  // S1: Drive forward 4 Sec timeout
+        robot.armDrive.setTargetPosition(415);
         robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armDrive.setPower(1.0);
-        sleep(1000);
+        robot.armDrive.setPower(0.3);
+        sleep(1500);
         robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armDrive.setPower(0.0);
-        encoderDrive(DRIVE_SPEED,   20, 20, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   15, 15, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
         robot.armDrive.setTargetPosition(0);
         robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armDrive.setPower(1.0);
-        sleep(1000);
+        robot.armDrive.setPower(0.3);
+        sleep(1500);
         robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armDrive.setPower(0.0);
-        encoderDrive(TURN_SPEED,   -9.71, 9.71, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  9.71,  -9.71 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        encoderDrive(TURN_SPEED,   -9, 9, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -20, -20, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,  9.,  -9. , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
         encoderDrive(DRIVE_SPEED,   -32, -32, 5.0);  // S6: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED, 9.71, -9.71, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 9, -9, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED,  -24,  -24 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   9.71, -9.71, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,   9, -9., 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,   5, -5, 5.0);  // S12:
+        encoderDrive(TURN_SPEED,   -5, 5, 5.0);  // S12:
         encoderDrive(DRIVE_SPEED, -52, -52, 5.0);  // S13: Reverse 24 Inches with 4 Sec timeout
 
 

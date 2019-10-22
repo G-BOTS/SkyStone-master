@@ -55,8 +55,8 @@ public class GetBlock_Red extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,   -20.75, -20.75, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.armDrive.setTargetPosition(415);
+        encoderDrive(DRIVE_SPEED,   -18, -18, 4.0);  // S1: Drive forward 4 Sec timeout
+        /*robot.armDrive.setTargetPosition(415);
         robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.armDrive.setPower(0.3);
         sleep(1500);
@@ -68,18 +68,25 @@ public class GetBlock_Red extends LinearOpMode {
         robot.armDrive.setPower(0.3);
         sleep(1500);
         robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.armDrive.setPower(0.0);
-        encoderDrive(TURN_SPEED,   -9, 9, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -20, -20, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  9.,  -9. , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        robot.armDrive.setPower(0.0);*/
+        encoderDrive(DRIVE_SPEED,   6, 6, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, -9.71, 9.71, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  108,  -108 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
         encoderDrive(DRIVE_SPEED,   -32, -32, 5.0);  // S6: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED, 9, -9, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED,  -24,  -24 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   9, -9., 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 9.71, -9.71, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  -6,  -6 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -12, -12, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 9.71, -9.71, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,   -9.71, 9.71, 5.0);  // S12:
+        encoderDrive(DRIVE_SPEED, -48, -48, 5.0);  // S13: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,   -9.71, 9.71, 5.0);  // S12:
         encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,   -5, 5, 5.0);  // S12:
-        encoderDrive(DRIVE_SPEED, -52, -52, 5.0);  // S13: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, -9.71, 9.71, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -20, -20, 5.0);  // S12:
+        encoderDrive(DRIVE_SPEED, 6, 6, 5.0);  // S13: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, -9.71, 9.71, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -48, -48, 5.0);  // S12:
 
 
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.

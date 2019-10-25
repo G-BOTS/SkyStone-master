@@ -2,9 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import static org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot.MID_SERVO;
 
 public class HardwareSky
 
@@ -12,7 +15,12 @@ public class HardwareSky
     /* Public OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
-    public DcMotor armDrive =  null;
+    public DcMotor  armDrive    = null;
+    public Servo    left_hand   = null;
+    public Servo    right_hand  = null;
+
+    //DigitalChannel digitalTouch;
+
     /* public DcMotor  leftArm     = null;
     public Servo    leftClaw    = null;
     public Servo    rightClaw   = null;
@@ -41,6 +49,9 @@ public class HardwareSky
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         armDrive = hwMap.get(DcMotor.class, "arm_drive" );
         //gripDrive =hwMap.get(DcMotor.class,"gripper");
+        //digitalTouch = hwMap.get(DigitalChannel.class, "sensor_digital");
+
+
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         armDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -58,10 +69,10 @@ public class HardwareSky
         armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        /*leftClaw  = hwMap.get(Servo.class, "left_hand");
-        rightClaw = hwMap.get(Servo.class, "right_hand");
-        leftClaw.setPosition(MID_SERVO);
-        rightClaw.setPosition(MID_SERVO);*/
+        /*left_hand  = hwMap.get(Servo.class, "left_hand");
+        right_hand = hwMap.get(Servo.class, "right_hand");
+        left_hand.setPosition(MID_SERVO);
+        right_hand.setPosition(MID_SERVO); */
     }
 }
 

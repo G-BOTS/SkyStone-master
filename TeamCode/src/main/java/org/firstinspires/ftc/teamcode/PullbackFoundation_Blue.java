@@ -17,14 +17,14 @@ public class PullbackFoundation_Blue extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
+    static final double     DRIVE_GEAR_REDUCTION    = 0.667;     // This is < 1.0 if geared UP for 16 to 24 tooth sprockets
     static final double     WHEEL_DIAMETER_INCHES   = 2.83 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
-    DigitalChannel digitalTouch;
+    //DigitalChannel digitalTouch;
 
     @Override
     public void runOpMode() {
@@ -37,7 +37,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
 
         //digitalTouch = HardwareSky.get(DigitalChannel.class, "sensor_digital");
 
-        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+       // digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -63,7 +63,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
         encoderDrive(DRIVE_SPEED,   -20.75, -20.75, 4.0);  // S1: Drive forward 4 Sec timeout
-        while (digitalTouch.getState() == false) {
+         /*(digitalTouch.getState() == false) {
             robot.leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             robot.rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             robot.leftDrive.setPower(0.4);
@@ -72,7 +72,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
         if (digitalTouch.getState() == true) {
             robot.left_hand.setPosition(0.7);
             robot.right_hand.setPosition(0.7);
-        }
+        } */
         //robot.armDrive.setTargetPosition(415);
         //robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //robot.armDrive.setPower(0.3);
@@ -86,13 +86,13 @@ public class PullbackFoundation_Blue extends LinearOpMode {
         //sleep(1500);
         //robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //robot.armDrive.setPower(0.0);
-        encoderDrive(TURN_SPEED,   -9, 9, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -20, -20, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  9.,  -9. , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED,   -32, -32, 5.0);  // S6: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED, 9, -9, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,   -9.85, 9.85, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,  9.85,  -9.85 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -28, -28, 5.0);  // S6: forward 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 9.85, -9.85, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED,  -24,  -24 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   9, -9., 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,   9.85, -9.85, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
         encoderDrive(TURN_SPEED,   -5, 5, 5.0);  // S12:

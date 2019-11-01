@@ -16,8 +16,8 @@ public class HardwareSky
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
     public DcMotor  armDrive    = null;
-    public Servo    left_hand   = null;
-    public Servo    right_hand  = null;
+    public Servo    left_hand ; // = null;
+    public Servo    right_hand;//  = null;
 
     //DigitalChannel digitalTouch;
 
@@ -69,10 +69,11 @@ public class HardwareSky
         armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        /*left_hand  = hwMap.get(Servo.class, "left_hand");
+        left_hand  = hwMap.get(Servo.class, "left_hand");
         right_hand = hwMap.get(Servo.class, "right_hand");
-        left_hand.setPosition(MID_SERVO);
-        right_hand.setPosition(MID_SERVO); */
+        left_hand.setPosition(0.4);
+        right_hand.setPosition(0.6);
+
     }
 }
 

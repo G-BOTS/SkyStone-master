@@ -18,6 +18,7 @@ public class HardwareSky
     public DcMotor  armDrive    = null;
     public Servo    left_hand ; // = null;
     public Servo    right_hand;//  = null;
+    //public Servo    dropper;
 
     //DigitalChannel digitalTouch;
 
@@ -71,8 +72,9 @@ public class HardwareSky
         // Define and initialize ALL installed servos.
         left_hand  = hwMap.get(Servo.class, "left_hand");
         right_hand = hwMap.get(Servo.class, "right_hand");
-        left_hand.setPosition(0.4);
-        right_hand.setPosition(0.6);
+        left_hand.setPosition(0.8);
+        right_hand.setPosition(0.2);
+        //dropper.setPosition(0.0);
 
     }
 }

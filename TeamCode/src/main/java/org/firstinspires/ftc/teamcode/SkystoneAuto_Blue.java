@@ -59,7 +59,7 @@ public class SkystoneAuto_Blue extends LinearOpMode {
 
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
         //robot.rightClaw.setPosition(0.0);
-        sleep(1000);     // pause for servos to move
+        //sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

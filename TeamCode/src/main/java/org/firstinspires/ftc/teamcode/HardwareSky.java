@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -18,6 +19,7 @@ public class HardwareSky
     public DcMotor  armDrive    = null;
     public Servo    left_hand ; // = null;
     public Servo    right_hand;//  = null;
+    public BNO055IMU     imu;
     //public Servo    dropper;
 
     //DigitalChannel digitalTouch;
@@ -75,6 +77,10 @@ public class HardwareSky
         left_hand.setPosition(0.8);
         right_hand.setPosition(0.2);
         //dropper.setPosition(0.0);
+
+        //define and initialize all installed sensors
+        imu = hwMap.get(BNO055IMU.class, "imu");
+
 
     }
 }

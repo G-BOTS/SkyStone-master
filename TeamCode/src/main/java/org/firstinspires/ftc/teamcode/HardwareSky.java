@@ -20,6 +20,8 @@ public class HardwareSky
     public Servo    left_hand ; // = null;
     public Servo    right_hand;//  = null;
     public BNO055IMU     imu;
+    public DcMotor  leftIntake  = null;
+
     //public Servo    dropper;
 
     //DigitalChannel digitalTouch;
@@ -51,6 +53,7 @@ public class HardwareSky
         leftDrive  = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         armDrive = hwMap.get(DcMotor.class, "arm_drive" );
+        leftIntake = hwMap.get(DcMotor.class, "left_intake");
         //gripDrive =hwMap.get(DcMotor.class,"gripper");
         //digitalTouch = hwMap.get(DigitalChannel.class, "sensor_digital");
 
@@ -58,11 +61,14 @@ public class HardwareSky
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         armDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftIntake.setDirection(DcMotor.Direction.FORWARD);
+
 
         // Set all motors to zero power
         leftDrive.setPower(0);
         rightDrive.setPower(0);
         armDrive.setPower(0);
+        leftIntake.setPower(0);
         //gripDrive.setpower(0);
 
         // Set all motors to run without encoders.
@@ -70,6 +76,8 @@ public class HardwareSky
         leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // Define and initialize ALL installed servos.
         left_hand  = hwMap.get(Servo.class, "left_hand");

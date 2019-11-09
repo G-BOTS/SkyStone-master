@@ -124,6 +124,17 @@ public class TeleopSky extends OpMode {
           //  robot.right_hand.setPosition(0.5);
         //}
 
+
+        if (gamepad1.a)   {
+            robot.leftIntake.setPower(0.5);
+            robot.armDrive.setPower(0.5);
+        } else if (gamepad1.b){
+            robot.leftIntake.setPower(-0.5);
+            robot.armDrive.setPower(-0.5);
+        } else {
+            robot.leftIntake.setPower(0.0);
+            robot.armDrive.setPower(0.0);
+        }
             // Use gamepad left & right Bumpers to open and close the claw
         /*if (gamepad1.right_bumper)
             clawOffset += CLAW_SPEED;

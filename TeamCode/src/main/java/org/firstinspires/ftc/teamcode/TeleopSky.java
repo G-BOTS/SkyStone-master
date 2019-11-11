@@ -185,7 +185,13 @@ public void elevator(int target_leftE, int target_rightE, double Elspeed)  {
         robot.leftElv.setPower(Elspeed);
         if (robot.rightElv.getCurrentPosition() > robot.leftElv.getCurrentPosition())  {
             robot.leftElv.setPower(Elspeed + 0.1);
-        } else if
+        } else if(robot.rightElv.getCurrentPosition() < robot.leftElv.getCurrentPosition()){
+            robot.rightElv.setPower(Elspeed + 0.1);
+        }else{
+            robot.rightElv.setPower(Elspeed);
+            robot.leftElv.setPower(Elspeed);
+
+        }
     }
 
 

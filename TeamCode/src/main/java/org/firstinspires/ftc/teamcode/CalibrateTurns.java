@@ -114,13 +114,13 @@ public class CalibrateTurns extends OpMode {
         robot.leftDrive.setPower(left);
         robot.rightDrive.setPower(right);
 
-        if (gamepad1.left_trigger > 0.1) {
+       /* if (gamepad1.left_trigger > 0.1) {
             robot.armDrive.setPower(0.2);
 
         } else if (gamepad1.right_trigger > 0.1) {
             robot.armDrive.setPower(-0.2);
         } else {
-            robot.armDrive.setPower(0);
+            robot.armDrive.setPower(0); */
 
         leftEnc = robot.leftDrive.getCurrentPosition();
         rightEnc = robot.rightDrive.getCurrentPosition(); {
@@ -153,7 +153,7 @@ public class CalibrateTurns extends OpMode {
             //telemetry.addData("left",  "%.2f", left);
             //telemetry.addData("right", "%.2f", right);
         }
-    }
+
 
     /*
      * Code to run ONCE after the driver hits STOP

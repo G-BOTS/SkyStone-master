@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.util.Range;
 
@@ -72,7 +73,9 @@ public class TeleopSky extends OpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Driver");    //
+        telemetry.addData("Say", "Hello Driver");//
+        //robot.rightElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.leftElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     /*
@@ -105,27 +108,27 @@ public class TeleopSky extends OpMode {
         robot.leftDrive.setPower(left);
         robot.rightDrive.setPower(right);
 
-        if (gamepad1.left_trigger > 0.1) {
+        /*if (gamepad1.left_trigger > 0.1) {
             robot.armDrive.setPower(0.2);
 
         } else if (gamepad1.right_trigger > 0.1) {
             robot.armDrive.setPower(-0.2);
         } else {
-            robot.armDrive.setPower(0);
+            robot.armDrive.setPower(0); */
 
-        if (gamepad1.right_bumper)   {
+        if (gamepad1.right_bumper) {
             robot.left_hand.setPosition(0.31);
             robot.right_hand.setPosition(0.68);
-        }   else if (gamepad1.left_bumper){
+        } else if (gamepad1.left_bumper) {
             robot.left_hand.setPosition(0.8);
             robot.right_hand.setPosition(0.2);
         }   //else  {
-           // robot.left_hand.setPosition(0.5);
-          //  robot.right_hand.setPosition(0.5);
+        // robot.left_hand.setPosition(0.5);
+        //  robot.right_hand.setPosition(0.5);
         //}
 
 
-        if (gamepad1.a)   {
+        /*if (gamepad1.a)   {
             robot.leftIntake.setPower(0.5);
             robot.armDrive.setPower(0.5);
         } else if (gamepad1.b){
@@ -133,20 +136,32 @@ public class TeleopSky extends OpMode {
             robot.armDrive.setPower(-0.5);
         } else {
             robot.leftIntake.setPower(0.0);
-            robot.armDrive.setPower(0.0);
+            robot.armDrive.setPower(0.0); */
+        //}
+
+        if (gamepad1.right_trigger > 0.1) {
+            robot.leftElv.setPower(-0.6);
+            robot.rightElv.setPower(-0.6);
+        } else if (gamepad1.left_trigger > 0.1) {
+            robot.leftElv.setPower(0.6);
+            robot.rightElv.setPower(0.6);
+        } else {
+            robot.leftElv.setPower(0.0);
+            robot.rightElv.setPower(0.0);
         }
-            // Use gamepad left & right Bumpers to open and close the claw
+    }
+        // Use gamepad left & right Bumpers to open and close the claw
         /*if (gamepad1.right_bumper)
             clawOffset += CLAW_SPEED;
         else if (gamepad1.left_bumper)
             clawOffset -= CLAW_SPEED;*/
 
-            // Move both servos to new position.  Assume servos are mirror image of each other.
+        // Move both servos to new position.  Assume servos are mirror image of each other.
        /* clawOffset = Range.clip(clawOffset, -0.5, 0.5);
         robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);*/
 
-            // Use gamepad buttons to move the arm up (Y) and down (A)
+        // Use gamepad buttons to move the arm up (Y) and down (A)
         /*if (gamepad1.y)
             robot.leftArm.setPower(robot.ARM_UP_POWER);
         else if (gamepad1.a)
@@ -154,18 +169,21 @@ public class TeleopSky extends OpMode {
         else
             robot.leftArm.setPower(0.0);*/
 
-            // Send telemetry message to signify robot running;
-            //telemetry.addData("claw",  "Offset = %.2f", clawOffset);
-            //telemetry.addData("left",  "%.2f", left);
-            //telemetry.addData("right", "%.2f", right);
+        // Send telemetry message to signify robot running;
+        //telemetry.addData("claw",  "Offset = %.2f", clawOffset);
+        //telemetry.addData("left",  "%.2f", left);
+        //telemetry.addData("right", "%.2f", right);
+        //}
+        //}
+//public void elevator(target_left, target_right)  {
+
+//}
+        /*
+         * Code to run ONCE after the driver hits STOP
+         */
+
+        @Override
+        public void stop(){
         }
-    }
 
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
-    @Override
-    public void stop() {
     }
-
-}

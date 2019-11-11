@@ -16,12 +16,13 @@ public class HardwareSky
     /* Public OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
-    public DcMotor  armDrive    = null;
+    //public DcMotor  armDrive    = null;
     public Servo    left_hand ; // = null;
     public Servo    right_hand;//  = null;
     public BNO055IMU     imu;
-    public DcMotor  leftIntake  = null;
-
+    //public DcMotor  leftIntake  = null;
+    public DcMotor  leftElv     = null;
+    public DcMotor  rightElv    = null;
     //public Servo    dropper;
 
     //DigitalChannel digitalTouch;
@@ -52,31 +53,36 @@ public class HardwareSky
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
-        armDrive = hwMap.get(DcMotor.class, "arm_drive" );
-        leftIntake = hwMap.get(DcMotor.class, "left_intake");
+        //armDrive = hwMap.get(DcMotor.class, "arm_drive" );
+        //leftIntake = hwMap.get(DcMotor.class, "left_intake");
+        leftElv = hwMap.get(DcMotor.class, "left_elevator");
+        rightElv = hwMap.get(DcMotor.class, "right_elevator");
         //gripDrive =hwMap.get(DcMotor.class,"gripper");
         //digitalTouch = hwMap.get(DigitalChannel.class, "sensor_digital");
 
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        armDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftIntake.setDirection(DcMotor.Direction.FORWARD);
-
+        //armDrive.setDirection(DcMotor.Direction.FORWARD);
+        //leftIntake.setDirection(DcMotor.Direction.FORWARD);
+        leftElv.setDirection(DcMotor.Direction.FORWARD);
+        rightElv.setDirection(DcMotor.Direction.FORWARD);
 
         // Set all motors to zero power
         leftDrive.setPower(0);
         rightDrive.setPower(0);
-        armDrive.setPower(0);
-        leftIntake.setPower(0);
+        //armDrive.setPower(0);
+        //leftIntake.setPower(0);
+        leftElv.setPower(0);
+        rightElv.setPower(0);
         //gripDrive.setpower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         // Define and initialize ALL installed servos.

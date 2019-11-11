@@ -38,10 +38,10 @@ public class Test extends LinearOpMode {
 
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.armDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.armDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0",  "Starting at %7d :%7d",
@@ -56,19 +56,19 @@ public class Test extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
         //encoderDrive(DRIVE_SPEED,   -27, -27, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.armDrive.setTargetPosition(2000);
-        robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armDrive.setPower(0.1);
+        //robot.armDrive.setTargetPosition(2000);
+        //robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.armDrive.setPower(0.1);
         sleep(1000);
-        robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.armDrive.setPower(0.0);
+        //robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.armDrive.setPower(0.0);
         //encoderDrive(DRIVE_SPEED,   20, 20, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
-        robot.armDrive.setTargetPosition(0);
-        robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armDrive.setPower(0.1);
+        //robot.armDrive.setTargetPosition(0);
+        //robot.armDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.armDrive.setPower(0.1);
         sleep(1000);
-        robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.armDrive.setPower(0.0);
+        //robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.armDrive.setPower(0.0);
         /*encoderDrive(TURN_SPEED,   -9.71, 9.71, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, -24, -24, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
         encoderDrive(TURN_SPEED,  9.71,  -9.71 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout

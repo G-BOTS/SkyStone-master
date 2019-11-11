@@ -99,6 +99,10 @@ public class TeleopSky extends OpMode {
     public void loop() {
         double left;
         double right;
+        double target_leftE;
+        double target_rightE;
+        double Elspeed;
+        Elspeed = 0.6;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = gamepad1.left_stick_y;
@@ -175,12 +179,22 @@ public class TeleopSky extends OpMode {
         //telemetry.addData("right", "%.2f", right);
         //}
         //}
-//public void elevator(target_left, target_right)  {
+public void elevator(int target_leftE, int target_rightE, double Elspeed)  {
+    while (robot.rightElv.getCurrentPosition()<target_rightE){
+        robot.rightElv.setPower(Elspeed);
+        robot.leftElv.setPower(Elspeed);
+        if (robot.rightElv.getCurrentPosition() > robot.leftElv.getCurrentPosition())  {
+            robot.leftElv.setPower(Elspeed + 0.1);
+        } else if
+    }
 
-//}
+
+}
         /*
          * Code to run ONCE after the driver hits STOP
          */
+
+
 
         @Override
         public void stop(){

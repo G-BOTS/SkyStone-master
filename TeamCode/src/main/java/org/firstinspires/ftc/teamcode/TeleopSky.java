@@ -73,9 +73,11 @@ public class TeleopSky extends OpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
+        robot.rightElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         telemetry.addData("Say", "Hello Driver");//
-        //robot.rightElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //robot.leftElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     /*
@@ -90,6 +92,7 @@ public class TeleopSky extends OpMode {
      */
     @Override
     public void start() {
+
     }
 
     /*
@@ -99,6 +102,8 @@ public class TeleopSky extends OpMode {
     public void loop() {
         double left;
         double right;
+        int leftElvEnc;
+        int rightElvEnc;
         double target_leftE;
         double target_rightE;
         double Elspeed;
@@ -153,6 +158,11 @@ public class TeleopSky extends OpMode {
             robot.leftElv.setPower(0.0);
             robot.rightElv.setPower(0.0);
         }
+        leftElvEnc = robot.leftElv.getCurrentPosition();
+        rightElvEnc = robot.rightElv.getCurrentPosition();
+        telemetry.addData("Left Elevator:", leftElvEnc);
+        telemetry.addData("Right Elevator:", rightElvEnc);
+
     }
         // Use gamepad left & right Bumpers to open and close the claw
         /*if (gamepad1.right_bumper)
@@ -174,7 +184,8 @@ public class TeleopSky extends OpMode {
             robot.leftArm.setPower(0.0);*/
 
         // Send telemetry message to signify robot running;
-        //telemetry.addData("claw",  "Offset = %.2f", clawOffset);
+
+    //telemetry.addData("claw",  "Offset = %.2f", clawOffset);
         //telemetry.addData("left",  "%.2f", left);
         //telemetry.addData("right", "%.2f", right);
         //}
@@ -190,6 +201,7 @@ public void elevator(int target_leftE, int target_rightE, double Elspeed)  {
         }else{
             robot.rightElv.setPower(Elspeed);
             robot.leftElv.setPower(Elspeed);
+
 
         }
     }

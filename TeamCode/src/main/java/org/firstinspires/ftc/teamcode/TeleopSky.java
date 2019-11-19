@@ -99,6 +99,10 @@ public class TeleopSky extends OpMode {
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     @Override
+    //public class Elevator implements Runnable{
+
+    //}
+
     public void loop() {
         double left;
         double right;
@@ -108,6 +112,7 @@ public class TeleopSky extends OpMode {
         double target_rightE;
         double Elspeed;
         Elspeed = 0.6;
+       Thread Elevator;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = gamepad1.left_stick_y;
@@ -158,6 +163,25 @@ public class TeleopSky extends OpMode {
             robot.leftElv.setPower(0.0);
             robot.rightElv.setPower(0.0);
         }
+        if (gamepad1.a)  {
+            robot.leftIntake.setPower(0.8);
+            robot.rightIntake.setPower(-0.8);
+        } else if (gamepad1.b)  {
+            robot.leftIntake.setPower(-0.8);
+            robot.rightIntake.setPower(0.8);
+        } else  {
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+        }
+        if (gamepad2.right_trigger > 0.1)  {
+            robot.horiElv.setPower(0.7);
+        } else if (gamepad2.left_trigger > 0.1) {
+            robot.horiElv.setPower(-0.7);
+        } else {
+            robot.horiElv.setPower(0.0);
+        }
+
+
         leftElvEnc = robot.leftElv.getCurrentPosition();
         rightElvEnc = robot.rightElv.getCurrentPosition();
         telemetry.addData("Left Elevator:", leftElvEnc);

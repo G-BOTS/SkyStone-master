@@ -24,7 +24,9 @@ public class HardwareSky
     public DcMotor  leftElv     = null;
     public DcMotor  rightElv    = null;
     //public Servo    dropper;
-    //public DcMotor  horiElv     = null;
+    public DcMotor  horiElv     = null;
+    public DcMotor  leftIntake  = null;
+    public DcMotor  rightIntake = null;
 
     //DigitalChannel digitalTouch;
 
@@ -60,7 +62,9 @@ public class HardwareSky
         rightElv = hwMap.get(DcMotor.class, "right_elevator");
         //gripDrive =hwMap.get(DcMotor.class,"gripper");
         //digitalTouch = hwMap.get(DigitalChannel.class, "sensor_digital");
-        //horiElv = hwMap.get(DcMotor.class, "horizontal_elevator");
+        horiElv = hwMap.get(DcMotor.class, "horizontal_elevator");
+        leftIntake = hwMap.get(DcMotor.class, "left_intake");
+        rightIntake = hwMap.get(DcMotor.class, "right_intake");
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
@@ -68,7 +72,10 @@ public class HardwareSky
         //leftIntake.setDirection(DcMotor.Direction.FORWARD);
         leftElv.setDirection(DcMotor.Direction.FORWARD);
         rightElv.setDirection(DcMotor.Direction.FORWARD);
-        //horiElv.setDirection(DcMotor.Direction.FORWARD);
+        horiElv.setDirection(DcMotor.Direction.FORWARD);
+        leftIntake.setDirection(DcMotor.Direction.FORWARD);
+        rightIntake.setDirection(DcMotor.Direction.FORWARD);
+
 
         // Set all motors to zero power
         leftDrive.setPower(0);
@@ -78,7 +85,9 @@ public class HardwareSky
         leftElv.setPower(0);
         rightElv.setPower(0);
         //gripDrive.setpower(0);
-        //horiElv.setPower(0);
+        horiElv.setPower(0);
+        leftIntake.setPower(0);
+        rightIntake.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -86,7 +95,10 @@ public class HardwareSky
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //horiElv.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
+        horiElv.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
+        leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // Define and initialize ALL installed servos.
         left_hand  = hwMap.get(Servo.class, "left_hand");

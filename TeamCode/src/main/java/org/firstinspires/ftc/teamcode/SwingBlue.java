@@ -14,7 +14,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class PullbackFoundation_Blue extends LinearOpMode {
+public class SwingBlue extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -26,6 +26,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
+    static final double  SPEED_ADJUST =0.585197;
 
     //DigitalChannel digitalTouch;
 
@@ -40,7 +41,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
 
         //digitalTouch = HardwareSky.get(DigitalChannel.class, "sensor_digital");
 
-       // digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+        // digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -65,25 +66,26 @@ public class PullbackFoundation_Blue extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,   -23.5, -23.5, 4.0);  // S1: Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,1,   -23.5, -23.5, 4.0);  // S1: Drive forward 4 Sec timeout
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
         sleep(200);
-        encoderDrive(DRIVE_SPEED,   16, 16, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,SPEED_ADJUST,   46.81, 27.39, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,1,  -10, -10, 4.0);
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
         sleep(100);
-        encoderDrive(TURN_SPEED,   -9.2, 9.2, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -21, -21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  9.2,  -9.2 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        //encoderDrive(TURN_SPEED,   -9.2, 9.2, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 1,21, 21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
+        /*encoderDrive(TURN_SPEED,  9.2,  -9.2 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
         encoderDrive(DRIVE_SPEED,   -32, -32, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
         encoderDrive(TURN_SPEED, 10.2, -10.2, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED,  -22,  -22 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
         encoderDrive(TURN_SPEED,   9.5, -9.5, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -21, -21, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -21, -21, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout */
         //encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
-       // encoderDrive(TURN_SPEED,   6.5, -6.5, 5.0);  // S12:
-       // encoderDrive(DRIVE_SPEED, -38, -38, 8.0);  // S13: Reverse 24 Inches with 4 Sec timeout
+        // encoderDrive(TURN_SPEED,   6.5, -6.5, 5.0);  // S12:
+        // encoderDrive(DRIVE_SPEED, -38, -38, 8.0);  // S13: Reverse 24 Inches with 4 Sec timeout
 
 
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
@@ -102,8 +104,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
      *  2) Move runs out of time
      *  3) Driver stops the opmode running.
      */
-    public void encoderDrive(double speed,
-                             double leftInches, double rightInches,
+    public void encoderDrive(double speed, double adjust, double leftInches, double rightInches,
                              double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
@@ -124,7 +125,7 @@ public class PullbackFoundation_Blue extends LinearOpMode {
             // reset the timeout time and start motion.
             runtime.reset();
             robot.leftDrive.setPower(Math.abs(speed));
-            robot.rightDrive.setPower(Math.abs(speed));
+            robot.rightDrive.setPower((Math.abs(speed))*adjust);// adjust will cause the robot to drive in a arc
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits

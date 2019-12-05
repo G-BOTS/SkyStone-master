@@ -73,17 +73,17 @@ public class PullbackFoundation_Red extends LinearOpMode {
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
         sleep(100);
-        encoderDrive(TURN_SPEED,   9.85, -9.85, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -20, -20, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  -10,  10 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        encoderDrive(TURN_SPEED,   9.2, -9.2, 5.0);  // S3: Turn Left 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -21, -21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,  -9.2,  9.2 , 5.0);  // S5: Turn Right 6 Inches with 5 Sec timeout
         encoderDrive(DRIVE_SPEED,   -30, -30, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED, -10.2, 10.2, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, -10.2, 10.2, 5.0);  // S7: Turn Right 6 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED,  -22,  -22 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   -10, 10, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -20, -20, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,   -6.5, 6.5, 5.0);  // S12:
-        encoderDrive(DRIVE_SPEED, -38, -38, 8.0);  // S13: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,   -9.5, 9.5, 5.0);  // S9: Turn Right 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -21, -21, 5.0);  // S10: Forward 24 Inches with 4 Sec timeout
+       // encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
+        //encoderDrive(TURN_SPEED,   -6.5, 6.5, 5.0);  // S12:
+        //encoderDrive(DRIVE_SPEED, -38, -38, 8.0);  // S13: Forward 24 Inches with 4 Sec timeout
 
 
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.

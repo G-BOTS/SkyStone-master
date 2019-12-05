@@ -27,6 +27,7 @@ public class HardwareSky
     public DcMotor  horiElv     = null;
     public DcMotor  leftIntake  = null;
     public DcMotor  rightIntake = null;
+    public Servo    pickup;
 
     //DigitalChannel digitalTouch;
 
@@ -103,9 +104,10 @@ public class HardwareSky
         // Define and initialize ALL installed servos.
         left_hand  = hwMap.get(Servo.class, "left_hand");
         right_hand = hwMap.get(Servo.class, "right_hand");
+        pickup = hwMap.get(Servo.class, "pick_up");
         left_hand.setPosition(0.8);
         right_hand.setPosition(0.2);
-        //dropper.setPosition(0.0);
+        pickup.setPosition(0.8);
 
         //define and initialize all installed sensors
         imu = hwMap.get(BNO055IMU.class, "imu");

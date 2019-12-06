@@ -26,7 +26,7 @@ public class SwingBlue extends LinearOpMode {
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
-    static final double  SPEED_ADJUST =0.585197;
+    static final double  SPEED_ADJUST = 1; //0.585197;
 
     //DigitalChannel digitalTouch;
 
@@ -70,12 +70,14 @@ public class SwingBlue extends LinearOpMode {
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
         sleep(200);
-        encoderDrive(DRIVE_SPEED,SPEED_ADJUST,   46.81, 27.39, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED,1,  -10, -10, 4.0);
+        encoderDrive(DRIVE_SPEED,1,   5, -5, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,1,  22, 22, 4.0);
+        encoderDrive(TURN_SPEED,1,   5, -5, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,1,   -10, -10, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
         sleep(100);
-        //encoderDrive(TURN_SPEED,   -9.2, 9.2, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+
         encoderDrive(DRIVE_SPEED, 1,21, 21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
         /*encoderDrive(TURN_SPEED,  9.2,  -9.2 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
         encoderDrive(DRIVE_SPEED,   -32, -32, 8.0);  // S6: forward 24 Inches with 4 Sec timeout

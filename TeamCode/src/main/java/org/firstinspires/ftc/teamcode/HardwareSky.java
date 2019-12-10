@@ -29,6 +29,7 @@ public class HardwareSky
     public DcMotor  rightIntake = null;
     public Servo    pickup;
 
+
     //DigitalChannel digitalTouch;
 
     /* public DcMotor  leftArm     = null;

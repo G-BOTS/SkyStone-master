@@ -15,7 +15,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class SwingBlue extends LinearOpMode {
+public class SwingBlue2 extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -67,12 +67,12 @@ public class SwingBlue extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,1,   -23.5, -23.5, 4.0);  // S1: Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,1,   -21, -21, 4.0);  // S1: Drive forward 4 Sec timeout
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
-        encoderDrive(DRIVE_SPEED,1,   1.8, -1.8, 4.0);  // S2:  Turn 45 to right 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
+        encoderDrive(DRIVE_SPEED,0.6,   23, 8, 7.0);  // S2:  Turn 45 to right 4 Sec timeout
+        /*encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
@@ -91,7 +91,7 @@ public class SwingBlue extends LinearOpMode {
         robot.right_hand.setPosition(0.2);
         sleep(100);
 
-        encoderDrive(DRIVE_SPEED, 1,21, 21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 1,21, 21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout */
         /*encoderDrive(TURN_SPEED,  9.2,  -9.2 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
         encoderDrive(DRIVE_SPEED,   -32, -32, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
         encoderDrive(TURN_SPEED, 10.2, -10.2, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout

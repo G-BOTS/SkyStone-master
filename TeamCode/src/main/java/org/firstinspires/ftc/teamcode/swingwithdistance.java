@@ -1,21 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
-//import com.qualcomm.robotcore.hardware.DistanceSensor;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-
-import java.nio.file.Watchable;
 
 @Autonomous
 //@Disabled
 
-public class SwingBlue2 extends LinearOpMode {
+public class swingwithdistance extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -67,7 +61,7 @@ public class SwingBlue2 extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,1,   -21, -21, 4.0);  // S1: Drive forward 4 Sec timeout
+        /*encoderDrive(DRIVE_SPEED,1,   -21, -21, 4.0);  // S1: Drive forward 4 Sec timeout
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
@@ -80,7 +74,7 @@ public class SwingBlue2 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 1, 24, 24, 4.0);
         encoderDrive(TURN_SPEED, 1, -4.94, 4.94, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 54, 54, 4.0);
-        /*encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
+        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
@@ -110,7 +104,11 @@ public class SwingBlue2 extends LinearOpMode {
         //robot.rightClaw.setPosition(0.0);
         sleep(1000);     // pause for servos to move
 
-        telemetry.addData("Path", "Complete");
+        telemetry.addData("Distance"," %.2f,sensorRange.getDistance(DistanceUnit.MM)");
+        telemetry.addData("Color","%.2f,sensorColor.getColor(red)");
+        telemetry.addData("Touch", "%.2f, sensorTouch.getTouch(Complete");
+
+
         telemetry.update();
     }
 

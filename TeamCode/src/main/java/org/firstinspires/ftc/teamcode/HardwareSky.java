@@ -1,11 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot.MID_SERVO;
@@ -19,7 +23,6 @@ public class HardwareSky
     //public DcMotor  armDrive    = null;
     public Servo    left_hand ; // = null;
     public Servo    right_hand;//  = null;
-    public BNO055IMU     imu;
     //public DcMotor  leftIntake  = null;
     public DcMotor  leftElv     = null;
     public DcMotor  rightElv    = null;
@@ -28,6 +31,12 @@ public class HardwareSky
     public DcMotor  leftIntake  = null;
     public DcMotor  rightIntake = null;
     public Servo    pickup;
+    public DistanceSensor sensorRange;
+    public BNO055IMU     imu;
+    public ColorSensor sensorColor;
+    public TouchSensor sensorTouch;
+
+
 
 
     //DigitalChannel digitalTouch;
@@ -67,6 +76,8 @@ public class HardwareSky
         horiElv = hwMap.get(DcMotor.class, "horizontal_elevator");
         leftIntake = hwMap.get(DcMotor.class, "left_intake");
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
+
+
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
@@ -110,9 +121,12 @@ public class HardwareSky
         right_hand.setPosition(0.2);
         pickup.setPosition(0.8);
 
-        //define and initialize all installed sensors
+        //Define and initialize all installed sensors
         imu = hwMap.get(BNO055IMU.class, "imu");
-
+        sensorRange = hwMap.get(DistanceSensor.class, "sensor_range");
+        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)sensorRange;
+        sensorColor = hwMap.get(ColorSensor.class,"sensor_Color");
+        sensorTouch = hwMap.get(TouchSensor.class,"sensor_Touch");
 
     }
 }

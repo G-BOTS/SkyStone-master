@@ -26,7 +26,7 @@ public class SwingBlue extends LinearOpMode {
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double     TURN_SPEED              = 0.8;
     static final double  SPEED_ADJUST = 1; //0.585197;
 
     //DigitalChannel digitalTouch;
@@ -71,8 +71,8 @@ public class SwingBlue extends LinearOpMode {
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
-        encoderDrive(DRIVE_SPEED,1,   1.8, -1.8, 4.0);  // S2:  Turn 45 to right 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
+        encoderDrive(TURN_SPEED,1,   1, -1, 4.0);  // S2:  Turn 45 to right 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 1, 10, 10, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);

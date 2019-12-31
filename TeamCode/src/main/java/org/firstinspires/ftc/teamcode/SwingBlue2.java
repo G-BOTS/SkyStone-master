@@ -71,15 +71,15 @@ public class SwingBlue2 extends LinearOpMode {
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
-        encoderDrive(TURN_SPEED,0.3,   38.2, 18.4105, 7.0);  // S2:  38.2 and 18.4
-        encoderDrive(DRIVE_SPEED, 1, -10, -12, 5.0);
+        encoderDrive(TURN_SPEED,0.2,   42.2, 19.3, 8.0);  // S2:  38.2 and 18.4
+        encoderDrive(DRIVE_SPEED, 1, -10, -11, 5.0);
         robot.right_hand.setPosition(0.2);
         robot.left_hand.setPosition(0.8);
-        encoderDrive(DRIVE_SPEED, 1, 10, 10, 4.0);
+        encoderDrive(DRIVE_SPEED, 1, 10, 12, 4.0);
         encoderDrive(TURN_SPEED, 1, 4.94, -4.94, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 24, 24, 4.0);
-        encoderDrive(TURN_SPEED, 1, -4.94, 4.94, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 54, 54, 4.0);
+        encoderDrive(DRIVE_SPEED, 1, 16, 16, 4.0);
+        //encoderDrive(TURN_SPEED, 1, -4.94, 4.94, 4.0);
+        //encoderDrive(DRIVE_SPEED, 1, 54, 54, 4.0);
         /*encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);

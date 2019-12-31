@@ -1,15 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
+//import com.qualcomm.robotcore.hardware.DistanceSensor;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+
+import java.nio.file.Watchable;
 
 @Autonomous
 //@Disabled
 
-public class swingwithdistance extends LinearOpMode {
+public class SwingRed2 extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -22,6 +28,8 @@ public class swingwithdistance extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 1;
     static final double  SPEED_ADJUST = 1; //0.585197;
+
+
 
     //DigitalChannel digitalTouch;
 
@@ -61,22 +69,20 @@ public class swingwithdistance extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,1,   -21, -21, 4.0);  // S1: Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,1,   -22, -22, 4.0);  // S1: Drive forward 4 Sec timeout
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
-        curveBack(1,0.2);//0.8 and 0.3856
-
-        /*encoderDrive(TURN_SPEED,0.3,   38.2, 18.4105, 7.0);  // S2:  38.2 and 18.4
-        encoderDrive(DRIVE_SPEED, 1, -10, -12, 5.0);
+        encoderDrive(TURN_SPEED,0.2,   19.3,43.2 , 7.0);  // S2:  38.2 and 18.4105
+        encoderDrive(DRIVE_SPEED, 1, -11, -10, 5.0);
         robot.right_hand.setPosition(0.2);
         robot.left_hand.setPosition(0.8);
-        encoderDrive(DRIVE_SPEED, 1, 10, 10, 4.0);
-        encoderDrive(TURN_SPEED, 1, 4.94, -4.94, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 24, 24, 4.0);
+        encoderDrive(DRIVE_SPEED, 1, 12, 10, 4.0);
         encoderDrive(TURN_SPEED, 1, -4.94, 4.94, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 54, 54, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
+        encoderDrive(DRIVE_SPEED, 1, 16, 16, 4.0);
+        //encoderDrive(TURN_SPEED, 1, -4.94, 4.94, 4.0);
+        //encoderDrive(DRIVE_SPEED, 1, 54, 54, 4.0);
+        /*encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
@@ -106,11 +112,7 @@ public class swingwithdistance extends LinearOpMode {
         //robot.rightClaw.setPosition(0.0);
         sleep(1000);     // pause for servos to move
 
-        telemetry.addData("Distance"," %.2f,sensorRange.getDistance(DistanceUnit.MM)");
-        telemetry.addData("Color","%.2f,sensorColor.getColor(red)");
-        telemetry.addData("Touch", "%.2f, sensorTouch.getTouch(Complete");
-
-
+        telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
@@ -142,9 +144,8 @@ public class swingwithdistance extends LinearOpMode {
 
             // reset the timeout time and start motion.
             runtime.reset();
-            robot.leftDrive.setPower(Math.abs(speed));
-            robot.rightDrive.setPower((Math.abs(speed))*adjust);// adjust will cause the robot to drive in a arc
-
+            robot.leftDrive.setPower(Math.abs(speed)*adjust);
+            robot.rightDrive.setPower((Math.abs(speed)));
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
             // its target position, the motion will stop.  This is "safer" in the event that the robot will
@@ -173,15 +174,6 @@ public class swingwithdistance extends LinearOpMode {
 
             //  sleep(250);   // optional pause after each move
         }
-    }
-    public void curveBack(double leftPower,double rightPower){
-         robot.leftDrive.setPower(leftPower);
-         robot.rightDrive.setPower(rightPower);
-         while(opModeIsActive() && (robot.rightDrive.getCurrentPosition()) < 4*COUNTS_PER_INCH){
-
-        }
-         robot.leftDrive.setPower(0);
-         robot.rightDrive.setPower(0);
     }
 }
 

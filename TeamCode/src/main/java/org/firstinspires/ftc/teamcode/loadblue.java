@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-
 @Autonomous
 //@Disabled
+public class loadblue extends LinearOpMode
+{
 
-public class swingwithdistance extends LinearOpMode {
+
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -61,22 +61,23 @@ public class swingwithdistance extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,1,   -21, -21, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.left_hand.setPosition(0.31);
+        encoderDrive(DRIVE_SPEED,1,   21, 21, 4.0);  // S1: Drive forward 4 Sec timeout
+       // robot.left_hand.setPosition(0.31);
+        //robot.right_hand.setPosition(0.69);//hook foundation
+        //sleep(200);
+        encoderDrive(DRIVE_SPEED,1,   -6, -6, 3.0);  // S2: drive backwards
+        encoderDrive(TURN_SPEED, 1, -9, 9, 5.0);//s3 turn 90 deg left
+        //robot.right_hand.setPosition(0.2);
+        //robot.left_hand.setPosition(0.8);
+        encoderDrive(DRIVE_SPEED, 1, 84, 84, 8.0);//s4 drive forward
+        encoderDrive(TURN_SPEED, 1, 9, -9, 4.0);//s5 turn 90 deg right
+        encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s6 drive forward
+         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
-        curveBack(1,0.2);//0.8 and 0.3856
-
-        /*encoderDrive(TURN_SPEED,0.3,   38.2, 18.4105, 7.0);  // S2:  38.2 and 18.4
-        encoderDrive(DRIVE_SPEED, 1, -10, -12, 5.0);
-        robot.right_hand.setPosition(0.2);
-        robot.left_hand.setPosition(0.8);
-        encoderDrive(DRIVE_SPEED, 1, 10, 10, 4.0);
-        encoderDrive(TURN_SPEED, 1, 4.94, -4.94, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 24, 24, 4.0);
-        encoderDrive(TURN_SPEED, 1, -4.94, 4.94, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 54, 54, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
+        encoderDrive(TURN_SPEED, 1, 18, -18, 8.0);//s7 turn right 180 deg
+        encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s8 drive forward
+        /*encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
@@ -106,11 +107,7 @@ public class swingwithdistance extends LinearOpMode {
         //robot.rightClaw.setPosition(0.0);
         sleep(1000);     // pause for servos to move
 
-        telemetry.addData("Distance"," %.2f,sensorRange.getDistance(DistanceUnit.MM)");
-        telemetry.addData("Color","%.2f,sensorColor.getColor(red)");
-        telemetry.addData("Touch", "%.2f, sensorTouch.getTouch(Complete");
-
-
+        telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
@@ -173,15 +170,6 @@ public class swingwithdistance extends LinearOpMode {
 
             //  sleep(250);   // optional pause after each move
         }
-    }
-    public void curveBack(double leftPower,double rightPower){
-         robot.leftDrive.setPower(leftPower);
-         robot.rightDrive.setPower(rightPower);
-         while(opModeIsActive() && (robot.rightDrive.getCurrentPosition()) < 4*COUNTS_PER_INCH){
-
-        }
-         robot.leftDrive.setPower(0);
-         robot.rightDrive.setPower(0);
     }
 }
 

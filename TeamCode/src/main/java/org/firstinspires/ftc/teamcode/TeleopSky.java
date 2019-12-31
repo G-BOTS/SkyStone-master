@@ -174,9 +174,9 @@ public class TeleopSky extends OpMode {
             robot.rightIntake.setPower(0.0);
         }
         if (gamepad2.right_trigger > 0.1)  {
-            robot.horiElv.setPower(0.7);
+            robot.horiElv.setPower(0.35);
         } else if (gamepad2.left_trigger > 0.1) {
-            robot.horiElv.setPower(-0.7);
+            robot.horiElv.setPower(-0.35);
         } else {
             robot.horiElv.setPower(0.0);
         }
@@ -187,6 +187,13 @@ public class TeleopSky extends OpMode {
         } //else {
             //robot.pickup.setPosition(0.3);
         //}
+        if (gamepad2.x)   {
+            robot.capstone.setPower(0.1);
+        } else if (gamepad2.y) {
+            robot.capstone.setPower(-0.1);
+        } else {
+            robot.capstone.setPower(0.0);
+        }
 
 
         leftElvEnc = robot.leftElv.getCurrentPosition();

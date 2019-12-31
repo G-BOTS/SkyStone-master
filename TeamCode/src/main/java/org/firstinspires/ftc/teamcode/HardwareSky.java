@@ -30,11 +30,12 @@ public class HardwareSky
     public DcMotor  horiElv     = null;
     public DcMotor  leftIntake  = null;
     public DcMotor  rightIntake = null;
+    public DcMotor  capstone    = null;
     public Servo    pickup;
-    public DistanceSensor sensorRange;
+   // public DistanceSensor sensorRange;
     public BNO055IMU     imu;
-    public ColorSensor sensorColor;
-    public TouchSensor sensorTouch;
+   // public ColorSensor sensorColor;
+   // public TouchSensor sensorTouch;
 
 
 
@@ -76,11 +77,12 @@ public class HardwareSky
         horiElv = hwMap.get(DcMotor.class, "horizontal_elevator");
         leftIntake = hwMap.get(DcMotor.class, "left_intake");
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
+        capstone = hwMap.get(DcMotor.class, "cap_stone");
 
 
 
-        leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         //armDrive.setDirection(DcMotor.Direction.FORWARD);
         //leftIntake.setDirection(DcMotor.Direction.FORWARD);
         leftElv.setDirection(DcMotor.Direction.FORWARD);
@@ -88,6 +90,7 @@ public class HardwareSky
         horiElv.setDirection(DcMotor.Direction.FORWARD);
         leftIntake.setDirection(DcMotor.Direction.FORWARD);
         rightIntake.setDirection(DcMotor.Direction.FORWARD);
+        capstone.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to zero power
@@ -101,6 +104,7 @@ public class HardwareSky
         horiElv.setPower(0);
         leftIntake.setPower(0);
         rightIntake.setPower(0);
+        capstone.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -111,6 +115,7 @@ public class HardwareSky
         horiElv.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
         leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        capstone.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         // Define and initialize ALL installed servos.
@@ -123,10 +128,10 @@ public class HardwareSky
 
         //Define and initialize all installed sensors
         imu = hwMap.get(BNO055IMU.class, "imu");
-        sensorRange = hwMap.get(DistanceSensor.class, "sensor_range");
-        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)sensorRange;
-        sensorColor = hwMap.get(ColorSensor.class,"sensor_Color");
-        sensorTouch = hwMap.get(TouchSensor.class,"sensor_Touch");
+       // sensorRange = hwMap.get(DistanceSensor.class, "sensor_range");
+       // Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)sensorRange;
+       // sensorColor = hwMap.get(ColorSensor.class,"sensor_Color");
+       // sensorTouch = hwMap.get(TouchSensor.class,"sensor_Touch");
 
     }
 }

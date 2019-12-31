@@ -15,12 +15,12 @@ public class loadblue extends LinearOpMode
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 0.667;     // This is < 1.0 if geared UP for 16 to 24 tooth sprockets
+    static final double     DRIVE_GEAR_REDUCTION    = 0.5;     // This is < 1.0 if geared UP for 16 to 24 tooth sprockets
     static final double     WHEEL_DIAMETER_INCHES   = 2.83 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 1;
+    static final double     TURN_SPEED              = 0.4;
     static final double  SPEED_ADJUST = 1; //0.585197;
 
     //DigitalChannel digitalTouch;
@@ -62,6 +62,12 @@ public class loadblue extends LinearOpMode
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
         encoderDrive(DRIVE_SPEED,1,   21, 21, 4.0);  // S1: Drive forward 4 Sec timeout
+        robot.leftIntake.setPower(0.8);
+        robot.rightIntake.setPower(-0.8);
+        encoderDrive(TURN_SPEED*0.5,1,3,0,2);
+        encoderDrive(DRIVE_SPEED*0.5,1,2,2,3 );
+        robot.leftIntake.setPower(0);
+        robot.rightIntake.setPower(0);
        // robot.left_hand.setPosition(0.31);
         //robot.right_hand.setPosition(0.69);//hook foundation
         //sleep(200);
@@ -69,7 +75,7 @@ public class loadblue extends LinearOpMode
         encoderDrive(TURN_SPEED, 1, -9, 9, 5.0);//s3 turn 90 deg left
         //robot.right_hand.setPosition(0.2);
         //robot.left_hand.setPosition(0.8);
-        encoderDrive(DRIVE_SPEED, 1, 84, 84, 8.0);//s4 drive forward
+        encoderDrive(DRIVE_SPEED, 1, 60, 60, 8.0);//s4 drive forward
         encoderDrive(TURN_SPEED, 1, 9, -9, 4.0);//s5 turn 90 deg right
         encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s6 drive forward
          robot.left_hand.setPosition(0.31);

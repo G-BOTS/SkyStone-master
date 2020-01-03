@@ -1,9 +1,22 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.google.ftcresearch.tfod.util.ImageUtils;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.robotcore.external.Func;
+import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
+
+import java.util.Locale;
 @Autonomous
 //@Disabled
 public class loadblue extends LinearOpMode
@@ -22,6 +35,7 @@ public class loadblue extends LinearOpMode
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.4;
     static final double  SPEED_ADJUST = 1; //0.585197;
+    static final double desHeading = 0;
 
     //DigitalChannel digitalTouch;
 
@@ -53,7 +67,15 @@ public class loadblue extends LinearOpMode
         telemetry.addData("Path0",  "Starting at %7d :%7d",
                 robot.leftDrive.getCurrentPosition(),
                 robot.rightDrive.getCurrentPosition());
-        telemetry.update();
+
+        telemetry.update(); BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -176,6 +198,14 @@ public class loadblue extends LinearOpMode
 
             //  sleep(250);   // optional pause after each move
         }
+    }
+
+    public void turnGyro(double desHeading) {
+        double error;
+        double measHeading;
+       //measHeading= robot.imu.getAngularOrientation();
+      //  error= desHeading- robot.imu.getAngularOrientation();
+
     }
 }
 

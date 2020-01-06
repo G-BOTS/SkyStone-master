@@ -36,6 +36,7 @@ public class loadblue extends LinearOpMode
     static final double     TURN_SPEED              = 0.4;
     static final double  SPEED_ADJUST = 1; //0.585197;
     static final double desHeading = 0;
+    static final double measHeading=0;
 
     //DigitalChannel digitalTouch;
 
@@ -97,18 +98,21 @@ public class loadblue extends LinearOpMode
         encoderDrive(TURN_SPEED, 1, -9, 9, 5.0);//s3 turn 90 deg left
         //robot.right_hand.setPosition(0.2);
         //robot.left_hand.setPosition(0.8);
-        encoderDrive(DRIVE_SPEED, 1, 60, 60, 8.0);//s4 drive forward
+        encoderDrive(DRIVE_SPEED, 1, 50, 50, 8.0);//s4 drive forward
         encoderDrive(TURN_SPEED, 1, 9, -9, 4.0);//s5 turn 90 deg right
         encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s6 drive forward
          robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);//hook foundation
         sleep(200);
-        encoderDrive(TURN_SPEED, 1, 18, -18, 8.0);//s7 turn right 180 deg
+        encoderDrive(TURN_SPEED, 1, 22, -22, 10.0);//s7 turn right 180 deg
         encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s8 drive forward
-        /*encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
+        robot.right_hand.setPosition(0.2);
+        robot.left_hand.setPosition(0.8);
+        sleep(200);
+       encoderDrive(DRIVE_SPEED, 1, -2, -2, 4.0);
+       encoderDrive(DRIVE_SPEED, 1, -9, 9, 4.0);
+        encoderDrive(DRIVE_SPEED, 1, 12, 12, 4.0);
+        /*encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
@@ -140,7 +144,7 @@ public class loadblue extends LinearOpMode
     }
 
     /*
-     *  Method to perfmorm a relative move, based on encoder counts.
+     *  Method to perform a relative move, based on encoder counts.
      *  Encoders are not reset as the move is based on the current position.
      *  Move will stop if any of three conditions occur:
      *  1) Move gets to the desired position
@@ -202,9 +206,9 @@ public class loadblue extends LinearOpMode
 
     public void turnGyro(double desHeading) {
         double error;
-        double measHeading;
+        //double measHeading;
        //measHeading= robot.imu.getAngularOrientation();
-      //  error= desHeading- robot.imu.getAngularOrientation();
+       error= desHeading - measHeading;
 
     }
 }

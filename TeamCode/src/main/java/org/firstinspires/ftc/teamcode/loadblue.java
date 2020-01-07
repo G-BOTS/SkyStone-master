@@ -35,9 +35,8 @@ public class loadblue extends LinearOpMode
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.4;
     static final double  SPEED_ADJUST = 1; //0.585197;
-    static final double desHeading = 0;
-    static final double measHeading=0;
 
+    BNO055IMU imu;
     //DigitalChannel digitalTouch;
 
     @Override
@@ -47,7 +46,20 @@ public class loadblue extends LinearOpMode
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
          */
+
         robot.init(hardwareMap);
+
+        //Define and initialize all installed sensors
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu.initialize(parameters);
 
         //digitalTouch = HardwareSky.get(DigitalChannel.class, "sensor_digital");
 
@@ -69,14 +81,7 @@ public class loadblue extends LinearOpMode
                 robot.leftDrive.getCurrentPosition(),
                 robot.rightDrive.getCurrentPosition());
 
-        telemetry.update(); BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        parameters.loggingEnabled      = true;
-        parameters.loggingTag          = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
+        telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -84,34 +89,34 @@ public class loadblue extends LinearOpMode
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,1,   21, 21, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.leftIntake.setPower(0.8);
-        robot.rightIntake.setPower(-0.8);
-        encoderDrive(TURN_SPEED*0.5,1,3,0,2);
-        encoderDrive(DRIVE_SPEED*0.5,1,2,2,3 );
-        robot.leftIntake.setPower(0);
-        robot.rightIntake.setPower(0);
+//        encoderDrive(DRIVE_SPEED,1,   21, 21, 4.0);  // S1: Drive forward 4 Sec timeout
+//        robot.leftIntake.setPower(0.8);
+//        robot.rightIntake.setPower(-0.8);
+//        encoderDrive(TURN_SPEED*0.5,1,3,0,2);
+//        encoderDrive(DRIVE_SPEED*0.5,1,2,2,3 );
+//        robot.leftIntake.setPower(0);
+//        robot.rightIntake.setPower(0);
        // robot.left_hand.setPosition(0.31);
         //robot.right_hand.setPosition(0.69);//hook foundation
         //sleep(200);
-        encoderDrive(DRIVE_SPEED,1,   -6, -6, 3.0);  // S2: drive backwards
-        encoderDrive(TURN_SPEED, 1, -9, 9, 5.0);//s3 turn 90 deg left
+//        encoderDrive(DRIVE_SPEED,1,   -6, -6, 3.0);  // S2: drive backwards
+//        encoderDrive(TURN_SPEED, 1, -9, 9, 5.0);//s3 turn 90 deg left
         //robot.right_hand.setPosition(0.2);
         //robot.left_hand.setPosition(0.8);
-        encoderDrive(DRIVE_SPEED, 1, 50, 50, 8.0);//s4 drive forward
-        encoderDrive(TURN_SPEED, 1, 9, -9, 4.0);//s5 turn 90 deg right
-        encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s6 drive forward
-         robot.left_hand.setPosition(0.31);
-        robot.right_hand.setPosition(0.69);//hook foundation
-        sleep(200);
-        encoderDrive(TURN_SPEED, 1, 22, -22, 10.0);//s7 turn right 180 deg
-        encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s8 drive forward
-        robot.right_hand.setPosition(0.2);
-        robot.left_hand.setPosition(0.8);
-        sleep(200);
-       encoderDrive(DRIVE_SPEED, 1, -2, -2, 4.0);
-       encoderDrive(DRIVE_SPEED, 1, -9, 9, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 12, 12, 4.0);
+//        encoderDrive(DRIVE_SPEED, 1, 50, 50, 8.0);//s4 drive forward
+//        encoderDrive(TURN_SPEED, 1, 9, -9, 4.0);//s5 turn 90 deg right
+//        encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s6 drive forward
+//         robot.left_hand.setPosition(0.31);
+//        robot.right_hand.setPosition(0.69);//hook foundation
+//        sleep(200);
+        turnGyro(180.0);
+//        encoderDrive(DRIVE_SPEED, 1, 6, 6, 4.0);//s8 drive forward
+//        robot.right_hand.setPosition(0.2);
+//        robot.left_hand.setPosition(0.8);
+//        sleep(200);
+//       encoderDrive(DRIVE_SPEED, 1, -2, -2, 4.0);
+//       encoderDrive(DRIVE_SPEED, 1, -9, 9, 4.0);
+//        encoderDrive(DRIVE_SPEED, 1, 12, 12, 4.0);
         /*encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
         encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
@@ -205,12 +210,31 @@ public class loadblue extends LinearOpMode
     }
 
     public void turnGyro(double desHeading) {
-        double error;
-        //double measHeading;
-       //measHeading= robot.imu.getAngularOrientation();
-       error= desHeading - measHeading;
+        double error = 0;
+        double measHeading = 0;
+        Orientation angles = this.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
+        this.imu.getPosition();
+        measHeading = angles.firstAngle;
+        //imu.getPosition();
+        error = desHeading - measHeading;//
+        telemetry.addData("measur","%f",measHeading);
+        telemetry.addData("Error","%f",error);
+        telemetry.update();
+        sleep(2000);
+
+        while (Math.abs(error) > 3 && opModeIsActive()) {
+            //imu.getPosition();
+            measHeading = angles.firstAngle;
+            error = desHeading - measHeading;
+            robot.leftDrive.setPower(TURN_SPEED * (error/Math.abs(error)));
+            robot.rightDrive.setPower(-TURN_SPEED * (error/Math.abs(error)));
+            telemetry.addData("Measured Heading: ", "%f", measHeading);
+            telemetry.addData("Error: ", error);
+            telemetry.update();
+        }
+
+        robot.leftDrive.setPower(0);
+        robot.rightDrive.setPower(0);
     }
 }
-
-

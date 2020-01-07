@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,6 +12,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import static org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot.MID_SERVO;
 
@@ -33,7 +39,6 @@ public class HardwareSky
     public DcMotor  capstone    = null;
     public Servo    pickup;
    // public DistanceSensor sensorRange;
-    public BNO055IMU     imu;
    // public ColorSensor sensorColor;
    // public TouchSensor sensorTouch;
 
@@ -125,14 +130,6 @@ public class HardwareSky
         left_hand.setPosition(0.8);
         right_hand.setPosition(0.2);
         pickup.setPosition(0.8);
-
-        //Define and initialize all installed sensors
-        imu = hwMap.get(BNO055IMU.class, "imu");
-       // sensorRange = hwMap.get(DistanceSensor.class, "sensor_range");
-       // Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)sensorRange;
-       // sensorColor = hwMap.get(ColorSensor.class,"sensor_Color");
-       // sensorTouch = hwMap.get(TouchSensor.class,"sensor_Touch");
-
     }
 }
 

@@ -106,25 +106,26 @@ public class PlayIMU extends LinearOpMode
             aButton = gamepad1.a;
             bButton = gamepad1.b;
             //touched = touch.isPressed();
+            rotate(170,power);
 
-            if (touched || aButton || bButton)
-            {
-                // backup.
-                leftMotor.setPower(power);
-                rightMotor.setPower(power);
-
-                sleep(500);
-
+//            if (touched || aButton || bButton)
+//            {
+//                 backup.
+//                leftMotor.setPower(-power);
+//                rightMotor.setPower(-power);
+//
+//                sleep(500);
+//
                 // stop.
-                leftMotor.setPower(0);
-                rightMotor.setPower(0);
+//                leftMotor.setPower(0);
+//                rightMotor.setPower(0);
 
                 // turn 90 degrees right.
-                if (touched || aButton) rotate(-90, power);
+//                if (touched || aButton) rotate(-45, power);
 
                 // turn 90 degrees left.
-                if (bButton) rotate(90, power);
-            }
+//                if (bButton) rotate(45, power);
+//            }
         }
 
         // turn the motors off.

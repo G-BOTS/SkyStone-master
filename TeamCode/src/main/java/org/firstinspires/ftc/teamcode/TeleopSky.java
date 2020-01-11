@@ -167,11 +167,11 @@ public class TeleopSky extends OpMode {
             robot.rightElv.setPower(0.0);
         }
         if (gamepad2.right_bumper)  {
-            robot.leftIntake.setPower(0.8);
-            robot.rightIntake.setPower(-0.8);
+            robot.leftIntake.setPower(0.6);
+            robot.rightIntake.setPower(-0.6);
         } else if (gamepad2.left_bumper)  {
-            robot.leftIntake.setPower(-0.8);
-            robot.rightIntake.setPower(0.8);
+            robot.leftIntake.setPower(-0.6);
+            robot.rightIntake.setPower(0.6);
         } else  {
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
@@ -187,15 +187,11 @@ public class TeleopSky extends OpMode {
             robot.pickup.setPosition(0.25);
         } else if (gamepad2.b) {
             robot.pickup.setPosition(0.7);
-        } //else {
-            //robot.pickup.setPosition(0.3);
-        //}
-        if (gamepad2.x)   {
-            robot.capstone.setPower(0.1);
-        } else if (gamepad2.y) {
-            robot.capstone.setPower(-0.1);
-        } else {
-            robot.capstone.setPower(0.0);
+
+        } if (gamepad2.x) {
+            robot.capstone.setPosition(0.92);
+        } else{
+          robot.capstone.setPosition(0.4);
         }
 
 

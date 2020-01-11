@@ -36,8 +36,8 @@ public class HardwareSky
     public DcMotor  horiElv     = null;
     public DcMotor  leftIntake  = null;
     public DcMotor  rightIntake = null;
-    public DcMotor  capstone    = null;
     public Servo    pickup;
+    public Servo    capstone;
    // public DistanceSensor sensorRange;
    // public ColorSensor sensorColor;
    // public TouchSensor sensorTouch;
@@ -77,59 +77,51 @@ public class HardwareSky
         //leftIntake = hwMap.get(DcMotor.class, "left_intake");
         leftElv = hwMap.get(DcMotor.class, "left_elevator");
         rightElv = hwMap.get(DcMotor.class, "right_elevator");
-        //gripDrive =hwMap.get(DcMotor.class,"gripper");
+
         //digitalTouch = hwMap.get(DigitalChannel.class, "sensor_digital");
         horiElv = hwMap.get(DcMotor.class, "horizontal_elevator");
         leftIntake = hwMap.get(DcMotor.class, "left_intake");
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
-        capstone = hwMap.get(DcMotor.class, "cap_stone");
+
 
 
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
-        //armDrive.setDirection(DcMotor.Direction.FORWARD);
-        //leftIntake.setDirection(DcMotor.Direction.FORWARD);
+
         leftElv.setDirection(DcMotor.Direction.FORWARD);
         rightElv.setDirection(DcMotor.Direction.FORWARD);
         horiElv.setDirection(DcMotor.Direction.FORWARD);
         leftIntake.setDirection(DcMotor.Direction.FORWARD);
         rightIntake.setDirection(DcMotor.Direction.FORWARD);
-        capstone.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to zero power
         leftDrive.setPower(0);
         rightDrive.setPower(0);
-        //armDrive.setPower(0);
-        //leftIntake.setPower(0);
         leftElv.setPower(0);
         rightElv.setPower(0);
-        //gripDrive.setpower(0);
         horiElv.setPower(0);
         leftIntake.setPower(0);
         rightIntake.setPower(0);
-        capstone.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //armDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         horiElv.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
         leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        capstone.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
 
         // Define and initialize ALL installed servos.
         left_hand  = hwMap.get(Servo.class, "left_hand");
         right_hand = hwMap.get(Servo.class, "right_hand");
         pickup = hwMap.get(Servo.class, "pick_up");
+        capstone = hwMap.get(Servo.class, "cap_stone");
         left_hand.setPosition(0.8);
         right_hand.setPosition(0.2);
         pickup.setPosition(0.8);
+        capstone.setPosition(0.4);
     }
 }
 

@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
-//import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
@@ -15,19 +14,18 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class SwingBlue extends LinearOpMode {
+public class LBnoIMU extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 0.667;     // This is geared UP for 16 to 32 tooth sprockets
+    static final double     DRIVE_GEAR_REDUCTION    = 0.5;     // This is < 1.0 if geared UP for 16 to 24 tooth sprockets
     static final double     WHEEL_DIAMETER_INCHES   = 2.83 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.8;
-    static final double  SPEED_ADJUST = 1; //0.585197;
+    static final double     TURN_SPEED              = 0.5;
 
     //DigitalChannel digitalTouch;
 
@@ -67,37 +65,29 @@ public class SwingBlue extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,1,   -23.5, -23.5, 4.0);  // S1: Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   24, 24, 4.0);  // S1: Drive forward 4 Sec timeout
+//        robot.left_hand.setPosition(0.31);
+//        robot.right_hand.setPosition(0.69);
+//        sleep(200);
+        encoderDrive(DRIVE_SPEED,   -8, -8, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+//        robot.left_hand.setPosition(0.8);
+//        robot.right_hand.setPosition(0.2);
+//        sleep(100);
+        encoderDrive(TURN_SPEED,   -8.8, 8.8, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 50, 50, 8.0);  // S4: forward 24 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED, 8.8 ,  -8.8 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,   9, 9, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
+
         robot.left_hand.setPosition(0.31);
-        robot.right_hand.setPosition(0.69);//hook foundation
-        sleep(200);
-        encoderDrive(TURN_SPEED,1,   1, -1, 4.0);  // S2:  Turn 45 to right 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 1, 10, 10, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 2, 2, 4.0);
-        encoderDrive(DRIVE_SPEED, 1, 1, -1, 4.0);
-        encoderDrive(DRIVE_SPEED,1,  16, 16, 5.0);//S3: drive backward
-        encoderDrive(TURN_SPEED,1,   7, -7, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED,1,   -10, -10, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
+        robot.right_hand.setPosition(0.69);
+        sleep(300);
+        encoderDrive(TURN_SPEED, 27.6, -27.6, 8.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  6,  6 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
-        sleep(100);
-
-        encoderDrive(DRIVE_SPEED, 1,21, 21, 5.0);  // S4: forward 24 Inches with 4 Sec timeout
-        /*encoderDrive(TURN_SPEED,  9.2,  -9.2 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED,   -32, -32, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED, 10.2, -10.2, 5.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED,  -22,  -22 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   9.5, -9.5, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -21, -21, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout */
+        sleep(300);
+        encoderDrive(DRIVE_SPEED,   9.5, -9.5, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 56, 56, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
         //encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
         // encoderDrive(TURN_SPEED,   6.5, -6.5, 5.0);  // S12:
         // encoderDrive(DRIVE_SPEED, -38, -38, 8.0);  // S13: Reverse 24 Inches with 4 Sec timeout
@@ -119,7 +109,8 @@ public class SwingBlue extends LinearOpMode {
      *  2) Move runs out of time
      *  3) Driver stops the opmode running.
      */
-    public void encoderDrive(double speed, double adjust, double leftInches, double rightInches,
+    public void encoderDrive(double speed,
+                             double leftInches, double rightInches,
                              double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
@@ -140,7 +131,7 @@ public class SwingBlue extends LinearOpMode {
             // reset the timeout time and start motion.
             runtime.reset();
             robot.leftDrive.setPower(Math.abs(speed));
-            robot.rightDrive.setPower((Math.abs(speed))*adjust);// adjust will cause the robot to drive in a arc
+            robot.rightDrive.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
@@ -172,5 +163,4 @@ public class SwingBlue extends LinearOpMode {
         }
     }
 }
-
 

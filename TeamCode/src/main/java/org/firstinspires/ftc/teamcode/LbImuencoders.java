@@ -149,9 +149,9 @@ public class LbImuencoders extends LinearOpMode {
         encoderElv(0,0,4.0);
 //        robot.rightElv.setPower(0.8);//down
 //        robot.leftElv.setPower(0.8);
-        sleep (1000);
-        robot.rightElv.setPower(0.0);
-        robot.leftElv.setPower(0.0);
+//        sleep (1000);
+//        robot.rightElv.setPower(0.0);
+//        robot.leftElv.setPower(0.0);
 
         rotate(-179,TURN_SPEED);
 

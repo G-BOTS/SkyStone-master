@@ -18,7 +18,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class LBIMU extends LinearOpMode {
+public class LbImuencoders extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -58,8 +58,12 @@ public class LBIMU extends LinearOpMode {
 
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -121,26 +125,30 @@ public class LBIMU extends LinearOpMode {
         robot.right_hand.setPosition(0.69);
         robot.pickup.setPosition(0.25);
         sleep(500);
-        robot.rightElv.setPower(-0.8);//up
-        robot.leftElv.setPower(-0.8);
-        sleep(1000);
-        robot.rightElv.setPower(0.0);
-        robot.leftElv.setPower(0.0);
+//        robot.rightElv.setPower(-0.8);//up
+//        robot.leftElv.setPower(-0.8);
+//        sleep(1000);
+        encoderElv(-100, -100, 4.0);
+//        robot.rightElv.setPower(0.0);
+//        robot.leftElv.setPower(0.0);
         robot.horiElv.setPower(-0.8);//out
-        sleep(1000);
-        robot.rightElv.setPower(0.2);//down
-        robot.leftElv.setPower(0.2);
+        sleep(500);
+//        robot.rightElv.setPower(0.2);//down
+//        robot.leftElv.setPower(0.2);
         robot.horiElv.setPower(0);
-        sleep(1000);
-        robot.rightElv.setPower(0.0);
-        robot.leftElv.setPower(0.0);
+        encoderElv(-50,-50, 4.0);
+//        sleep(1000);
+//        robot.rightElv.setPower(0.0);
+//        robot.leftElv.setPower(0.0);
         robot.pickup.setPosition(0.8);// drop block
-        robot.rightElv.setPower(-0.8);//up
-        robot.leftElv.setPower(-0.8);
+//        robot.rightElv.setPower(-0.8);//up
+//        robot.leftElv.setPower(-0.8);
+        encoderElv(-100,-100,4.0);
         robot.horiElv.setPower(0.8);//in
-        sleep(1000);
-        robot.rightElv.setPower(0.8);//down
-        robot.leftElv.setPower(0.8);
+        sleep(500);
+        encoderElv(0,0,4.0);
+//        robot.rightElv.setPower(0.8);//down
+//        robot.leftElv.setPower(0.8);
         sleep (1000);
         robot.rightElv.setPower(0.0);
         robot.leftElv.setPower(0.0);
@@ -215,6 +223,55 @@ public class LBIMU extends LinearOpMode {
             // Turn off RUN_TO_POSITION
             robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            //  sleep(250);   // optional pause after each move
+        }
+    }
+    public void encoderElv( int leftElvTarget, int rightElvTarget,
+                             double timeoutS) {
+
+
+        // Ensure that the opmode is still active
+        if (opModeIsActive()) {
+
+
+            robot.leftElv.setTargetPosition(leftElvTarget);
+            robot.rightElv.setTargetPosition(rightElvTarget);
+
+            // Turn On RUN_TO_POSITION
+            robot.leftElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.rightElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            robot.leftElv.setPower(Math.abs(0.4));
+            robot.rightElv.setPower(Math.abs(0.4));
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+            // its target position, the motion will stop.  This is "safer" in the event that the robot will
+            // always end the motion as soon as possible.
+            // However, if you require that BOTH motors have finished their moves before the robot continues
+            // onto the next step, use (isBusy() || isBusy()) in the loop test.
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
+
+                // Display it for the driver.
+                telemetry.addData("Path1",  "Running to %7d :%7d", leftElvTarget , rightElvTarget);
+                telemetry.addData("Path2",  "Running at %7d :%7d",
+                        robot.leftElv.getCurrentPosition(),
+                        robot.rightElv.getCurrentPosition());
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            robot.leftElv.setPower(0);
+            robot.rightElv.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             //  sleep(250);   // optional pause after each move
         }

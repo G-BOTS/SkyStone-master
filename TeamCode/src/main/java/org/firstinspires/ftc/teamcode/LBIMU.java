@@ -7,14 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-        import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.DigitalChannel;
-        import com.qualcomm.robotcore.util.ElapsedTime;
 
-        import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -36,7 +29,8 @@ public class LBIMU extends LinearOpMode {
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double     TURN_SPEED              = 0.4;
+    static final double     INTAKE_SPEED = 0.6;
     BNO055IMU imu;
     Orientation             lastAngles = new Orientation();
     double                  globalAngle, power = 0.50, correction;
@@ -64,10 +58,11 @@ public class LBIMU extends LinearOpMode {
 
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //robot.armDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.armDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0",  "Starting at %7d :%7d",
@@ -98,37 +93,57 @@ public class LBIMU extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,   24, 24, 4.0);  // S1: Drive forward 4 Sec timeout
-//        robot.left_hand.setPosition(0.31);
-//        robot.right_hand.setPosition(0.69);
-//        sleep(200);
-        encoderDrive(DRIVE_SPEED,   -8, -8, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
-//        robot.left_hand.setPosition(0.8);
-//        robot.right_hand.setPosition(0.2);
-//        sleep(100);
-        encoderDrive(TURN_SPEED,   -8.8, 8.8, 5.0);  // S3: Turn Right 6 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 50, 50, 8.0);  // S4: forward 24 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED, 8.8 ,  -8.8 , 5.0);  // S5: Turn Left 6 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,   24, 24, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(-45,TURN_SPEED);
+
+        robot.rightIntake.setPower(INTAKE_SPEED);
+        robot.leftIntake.setPower(INTAKE_SPEED);
+        encoderDrive(DRIVE_SPEED,   4, 4, 4.0);  // S1: Drive forward 4 Sec timeout
+        robot.rightIntake.setPower(0.0);
+        robot.leftIntake.setPower(0.0);
+        rotate(45,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -9, -9, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        rotate(82,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED, 54, 54, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
+        rotate(-82,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   9, 9, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
 
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
-        sleep(300);
-        encoderDrive(TURN_SPEED, 27.6, -27.6, 8.0);  // S7: Turn Left 6 Inches with 4 Sec timeout
+        robot.pickup.setPosition(0.25);
+        sleep(500);
+        robot.rightElv.setPower(-0.8);//up
+        robot.leftElv.setPower(-0.8);
+        sleep(1000);
+        robot.rightElv.setPower(0.0);
+        robot.leftElv.setPower(0.0);
+        robot.horiElv.setPower(-0.8);//out
+        sleep(1000);
+        robot.rightElv.setPower(0.2);//down
+        robot.leftElv.setPower(0.2);
+        robot.horiElv.setPower(0);
+        sleep(1000);
+        robot.rightElv.setPower(0.0);
+        robot.leftElv.setPower(0.0);
+        robot.pickup.setPosition(0.8);// drop block
+        robot.rightElv.setPower(-0.8);//up
+        robot.leftElv.setPower(-0.8);
+        robot.horiElv.setPower(0.8);//in
+        sleep(1000);
+        robot.rightElv.setPower(0.8);//down
+        robot.leftElv.setPower(0.8);
+        sleep (1000);
+        robot.rightElv.setPower(0.0);
+        robot.leftElv.setPower(0.0);
+
+        rotate(-179,TURN_SPEED);
+
         encoderDrive(DRIVE_SPEED,  6,  6 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
         sleep(300);
-        encoderDrive(DRIVE_SPEED,   9.5, -9.5, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, 56, 56, 5.0);  // S10: Reverse 24 Inches with 4 Sec timeout
-        //encoderDrive(DRIVE_SPEED, 12, 12, 5.0);  // S11: Reverse 24 Inches with 4 Sec timeout
-        // encoderDrive(TURN_SPEED,   6.5, -6.5, 5.0);  // S12:
-        // encoderDrive(DRIVE_SPEED, -38, -38, 8.0);  // S13: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -9.5, -9.5, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
 
-
-        //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
-        //robot.rightClaw.setPosition(0.0);
-        sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

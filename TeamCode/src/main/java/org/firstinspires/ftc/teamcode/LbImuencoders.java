@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -16,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import java.nio.file.Watchable;
 
 @Autonomous
-//@Disabled
+@Disabled
 
 public class LbImuencoders extends LinearOpMode {
     /* Declare OpMode members. */
@@ -106,20 +107,20 @@ public class LbImuencoders extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,   24, 24, 4.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(-45,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   20, 20, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(-38,TURN_SPEED);
 
         robot.rightIntake.setPower(INTAKE_SPEED);
         robot.leftIntake.setPower(INTAKE_SPEED);
         encoderDrive(DRIVE_SPEED,   4, 4, 4.0);  // S1: Drive forward 4 Sec timeout
-        rotate(45,TURN_SPEED);
+        rotate(38,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   -9, -9, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
         robot.rightIntake.setPower(0.0);
         robot.leftIntake.setPower(0.0);
-        rotate(80,TURN_SPEED);
+        rotate(68,TURN_SPEED);
         encoderDrive(DRIVE_SPEED, 55, 55, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
-        rotate(-80,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   9, 9, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
+        rotate(-68,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   11, 11, 4.0);  // S6: forward 24 Inches with 4 Sec timeout
 
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);

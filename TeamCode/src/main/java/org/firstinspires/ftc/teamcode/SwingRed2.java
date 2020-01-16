@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import java.nio.file.Watchable;
 
 @Autonomous
-//@Disabled
+@Disabled
 
 public class SwingRed2 extends LinearOpMode {
     /* Declare OpMode members. */

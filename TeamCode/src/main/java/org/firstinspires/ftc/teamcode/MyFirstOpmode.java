@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
-//@Disabled
+@Disabled
 public class MyFirstOpmode extends LinearOpMode {
     /*private Gyroscope imu;
     private DcMotor motorTest;

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Autonomous
-//@Disabled
+@Disabled
 
 public class SkystoneAuto_Blue extends LinearOpMode {
     /* Declare OpMode members. */

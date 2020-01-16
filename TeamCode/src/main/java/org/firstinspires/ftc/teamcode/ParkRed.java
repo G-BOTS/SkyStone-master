@@ -17,9 +17,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import java.nio.file.Watchable;
 
 @Autonomous
-@Disabled
+//@Disabled
 
-public class LBIMU extends LinearOpMode {
+public class ParkRed extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -103,56 +103,11 @@ public class LBIMU extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,   24, 24, 4.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(-45,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   19, 19, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(70,TURN_SPEED);
 
-        robot.rightIntake.setPower(INTAKE_SPEED);
-        robot.leftIntake.setPower(INTAKE_SPEED);
-        encoderDrive(DRIVE_SPEED,   4, 4, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.rightIntake.setPower(0.0);
-        robot.leftIntake.setPower(0.0);
-        rotate(45,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   -9, -9, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
-        rotate(82,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED, 54, 54, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
-        rotate(-82,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   9, 9, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
 
-        robot.left_hand.setPosition(0.31);
-        robot.right_hand.setPosition(0.69);
-        robot.pickup.setPosition(0.25);
-        sleep(500);
-        robot.rightElv.setPower(-0.8);//up
-        robot.leftElv.setPower(-0.8);
-        sleep(1000);
-        robot.rightElv.setPower(0.0);
-        robot.leftElv.setPower(0.0);
-        robot.horiElv.setPower(-0.8);//out
-        sleep(1000);
-        robot.rightElv.setPower(0.2);//down
-        robot.leftElv.setPower(0.2);
-        robot.horiElv.setPower(0);
-        sleep(1000);
-        robot.rightElv.setPower(0.0);
-        robot.leftElv.setPower(0.0);
-        robot.pickup.setPosition(0.8);// drop block
-        robot.rightElv.setPower(-0.8);//up
-        robot.leftElv.setPower(-0.8);
-        robot.horiElv.setPower(0.8);//in
-        sleep(1000);
-        robot.rightElv.setPower(0.8);//down
-        robot.leftElv.setPower(0.8);
-        sleep (1000);
-        robot.rightElv.setPower(0.0);
-        robot.leftElv.setPower(0.0);
-
-        rotate(-179,TURN_SPEED);
-
-        encoderDrive(DRIVE_SPEED,  6,  6 , 5.0);  // S8: Forward 24 Inches with 5 Sec timeout
-        robot.left_hand.setPosition(0.8);
-        robot.right_hand.setPosition(0.2);
-        sleep(300);
-        encoderDrive(DRIVE_SPEED,   -9.5, -9.5, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   18, 18, 4.0);  // S1: Drive forward 4 Sec timeout
 
 
         telemetry.addData("Path", "Complete");
@@ -329,5 +284,4 @@ public class LBIMU extends LinearOpMode {
         resetAngle();
     }
 }
-
 

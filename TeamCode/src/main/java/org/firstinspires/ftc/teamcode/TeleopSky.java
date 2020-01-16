@@ -167,11 +167,11 @@ public class TeleopSky extends OpMode {
             robot.rightElv.setPower(0.0);
         }
         if (gamepad2.right_bumper)  {
-            robot.leftIntake.setPower(0.6);
-            robot.rightIntake.setPower(-0.6);
+            robot.leftIntake.setPower(0.8);
+            robot.rightIntake.setPower(-0.8);
         } else if (gamepad2.left_bumper)  {
-            robot.leftIntake.setPower(-0.6);
-            robot.rightIntake.setPower(0.6);
+            robot.leftIntake.setPower(-0.8);
+            robot.rightIntake.setPower(0.8);
         } else  {
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);

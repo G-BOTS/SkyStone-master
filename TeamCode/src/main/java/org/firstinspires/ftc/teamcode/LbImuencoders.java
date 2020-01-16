@@ -112,12 +112,12 @@ public class LbImuencoders extends LinearOpMode {
         robot.rightIntake.setPower(INTAKE_SPEED);
         robot.leftIntake.setPower(INTAKE_SPEED);
         encoderDrive(DRIVE_SPEED,   4, 4, 4.0);  // S1: Drive forward 4 Sec timeout
-        robot.rightIntake.setPower(0.0);
-        robot.leftIntake.setPower(0.0);
         rotate(45,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   -9, -9, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        robot.rightIntake.setPower(0.0);
+        robot.leftIntake.setPower(0.0);
         rotate(80,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED, 54, 54, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 55, 55, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
         rotate(-80,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   9, 9, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
 
@@ -145,7 +145,7 @@ public class LbImuencoders extends LinearOpMode {
 //        robot.leftElv.setPower(-0.8);
         encoderElv(-1000,-1000,4.0);
         robot.horiElv.setPower(0.8);//in
-        sleep(500);
+        sleep(100);
         encoderElv(0,0,4.0);
 //        robot.rightElv.setPower(0.8);//down
 //        robot.leftElv.setPower(0.8);

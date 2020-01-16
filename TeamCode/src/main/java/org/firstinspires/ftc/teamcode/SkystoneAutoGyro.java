@@ -83,7 +83,7 @@ import java.util.Locale;
  */
 
 @Autonomous(name="SkystoneAutoGyro", group="Pushbot")
-//@Disabled
+@Disabled
 public class SkystoneAutoGyro extends LinearOpMode {
 
     /* Declare OpMode members. */

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Autonomous
-//@Disabled
+@Disabled
 
 public class GetBlock_Red extends LinearOpMode {
     /* Declare OpMode members. */

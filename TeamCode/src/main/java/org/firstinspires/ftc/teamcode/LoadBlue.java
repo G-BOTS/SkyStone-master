@@ -126,16 +126,17 @@ public class LoadBlue extends LinearOpMode {
 //        sleep(1300);
 //        robot.horiElv.setPower(0);
 //        encoderElv(0,0,0.8);
-        encoderDrive(DRIVE_SPEED,   -9, -9, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -6, -6, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
 //        robot.rightIntake.setPower(0.0);
 //        robot.leftIntake.setPower(0.0);
-        rotate(68,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED, 50, 50, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
-        rotate(-68,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   11, 11, 4.0);  // S6: forward 24 Inches with 4 Sec timeout
+        rotate(66,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED, 53, 53, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
+        rotate(-64,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   12, 12, 4.0);  // S6: forward 24 Inches with 4 Sec timeout
 
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
+        sleep(500);
 //        robot.pickup.setPosition(0.25);
 //        sleep(500);
 //        robot.rightElv.setPower(-0.8);//up

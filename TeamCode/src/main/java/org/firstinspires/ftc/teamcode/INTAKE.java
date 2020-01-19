@@ -19,7 +19,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class ParkBlue extends LinearOpMode {
+public class INTAKE extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot   = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -102,12 +102,32 @@ public class ParkBlue extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
+//        robot.leftIntake.setPower(0.6);
+//        robot.rightIntake.setPower(-0.6);
 
-        encoderDrive(DRIVE_SPEED,   19, 19, 4.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(-65,TURN_SPEED);
-
-
-        encoderDrive(DRIVE_SPEED,   18, 18,4.0);
+        encoderDrive(DRIVE_SPEED,   12, 12, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(37,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   10, 10, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(-68,TURN_SPEED);
+        robot.leftIntake.setPower(0.6);
+        robot.rightIntake.setPower(0.-6);
+        encoderDrive(DRIVE_SPEED,10,10,4);
+        rotate(-37,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   6, 6,4.0);
+        robot.leftIntake.setPower(0.0);
+        robot.rightIntake.setPower(0.0);
+        rotate(37,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -12, -12,4.0);
+        rotate(-37,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -45, -45,8.0);
+        rotate(37,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   9, 9,4.0);
+        robot.left_hand.setPosition(0.31);
+        robot.right_hand.setPosition(0.69);
+        rotate(-178,TURN_SPEED);
+        rotate(37,TURN_SPEED);
+        robot.left_hand.setPosition(0.8);
+        robot.right_hand.setPosition(0.2);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

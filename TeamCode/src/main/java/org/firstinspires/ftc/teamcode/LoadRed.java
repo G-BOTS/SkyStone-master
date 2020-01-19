@@ -107,22 +107,23 @@ public class LoadRed extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
         encoderDrive(DRIVE_SPEED,   19, 19, 4.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(38,TURN_SPEED);
+//        rotate(38,TURN_SPEED);
 
 //        robot.rightIntake.setPower(INTAKE_SPEED);
 //        robot.leftIntake.setPower(INTAKE_SPEED);
 //        encoderDrive(DRIVE_SPEED,   4, 4, 4.0);  // S1: Drive forward 4 Sec timeout
-        rotate(-38,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   -9, -9, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
+//        rotate(-38,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -6, -6, 4.0);  // S2: hook foundationand drive backwards  with 4 Sec timeout
 //        robot.rightIntake.setPower(0.0);
 //        robot.leftIntake.setPower(0.0);
-        rotate(-66,TURN_SPEED);
+        rotate(-64,TURN_SPEED);
         encoderDrive(DRIVE_SPEED, 50, 50, 8.0);  // S4: 50 forward 24 Inches with 4 Sec timeout
-        rotate(66,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   10, 10, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
+        rotate(64,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   12, 12, 8.0);  // S6: forward 24 Inches with 4 Sec timeout
 
-//        robot.left_hand.setPosition(0.31);
-//        robot.right_hand.setPosition(0.69);
+        robot.left_hand.setPosition(0.31);
+        robot.right_hand.setPosition(0.69);
+        sleep(500);
 //        robot.pickup.setPosition(0.25);
 //        sleep(500);
 //        robot.rightElv.setPower(-0.8);//up
@@ -155,9 +156,10 @@ public class LoadRed extends LinearOpMode {
 
         rotate(179,0.8);
 
-//        robot.left_hand.setPosition(0.8);
-//        robot.right_hand.setPosition(0.2);
-//        sleep(300);
+        encoderDrive(DRIVE_SPEED, 6, 6, 5.0);
+        robot.left_hand.setPosition(0.8);
+        robot.right_hand.setPosition(0.2);
+        sleep(300);
         encoderDrive(DRIVE_SPEED,   -2, -2, 5.0);  // S9: Turn left 12 Inches with 4 Sec timeout
         rotate(-64,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,30,30,5);

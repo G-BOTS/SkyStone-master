@@ -104,7 +104,7 @@ public class ParkRed extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
         encoderDrive(DRIVE_SPEED,   19, 19, 4.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(70,TURN_SPEED);
+        rotate(65,TURN_SPEED);
 
 
         encoderDrive(DRIVE_SPEED,   18, 18, 4.0);  // S1: Drive forward 4 Sec timeout

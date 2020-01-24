@@ -120,11 +120,12 @@ public class INTAKE extends LinearOpMode {
         encoderDrive(DRIVE_SPEED,   -12, -12,4.0);
         rotate(-37,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   -45, -45,8.0);
-        rotate(37,TURN_SPEED);
+        rotate(68,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   9, 9,4.0);
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
-        rotate(-178,TURN_SPEED);
+        rotate(-68,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED, 6, 6, 4.0);
         rotate(37,TURN_SPEED);
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);

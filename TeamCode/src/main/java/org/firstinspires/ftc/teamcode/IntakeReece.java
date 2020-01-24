@@ -106,18 +106,18 @@ public class IntakeReece extends LinearOpMode {
 //        robot.rightIntake.setPower(-0.6);
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
-        encoderDrive(DRIVE_SPEED,   41, 41, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   41, 41, 5.0);  // S1:  24 Drive forward 4 Sec timeout
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
         encoderDrive(DRIVE_SPEED,   -12, -12, 4.0);  // S1:  24 Drive forward 4 Sec timeout
         rotate(-67,TURN_SPEED);
         robot.leftIntake.setPower(0.6);
-        robot.rightIntake.setPower(0.6);
-        encoderDrive(DRIVE_SPEED,6,6,4);
+        robot.rightIntake.setPower(-0.6);
+        encoderDrive(DRIVE_SPEED,5,5,4);
         rotate(37,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -10, -10,4.0);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(-0.0);
-        encoderDrive(DRIVE_SPEED,   -10, -10,4.0);
         rotate(-37,TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   -53, -53,8.0);
         rotate(68,TURN_SPEED);
@@ -125,6 +125,8 @@ public class IntakeReece extends LinearOpMode {
         robot.left_hand.setPosition(0.31);
         robot.right_hand.setPosition(0.69);
         sleep(200);
+        rotate(-90,0.95);
+        encoderDrive(DRIVE_SPEED,6,6,4);
         rotate(-179,0.95);
         encoderDrive(DRIVE_SPEED,   11, 11,4.0);
         robot.left_hand.setPosition(0.8);

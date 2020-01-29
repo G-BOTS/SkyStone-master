@@ -109,7 +109,7 @@ public class HardwareSky
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        horiElv.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS);
+        horiElv.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 

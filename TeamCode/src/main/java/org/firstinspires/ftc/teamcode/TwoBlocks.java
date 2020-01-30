@@ -18,7 +18,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class IntakeMod extends LinearOpMode {
+public class TwoBlocks extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -103,53 +103,37 @@ public class IntakeMod extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-//        robot.leftIntake.setPower(0.8);
-//        robot.rightIntake.setPower(-0.8);
+        robot.leftIntake.setPower(0.8);
+        robot.rightIntake.setPower(-0.8);
 
 //        robot.left_hand.setPosition(0.31);
 //        robot.right_hand.setPosition(0.69);
         encoderDrive(DRIVE_SPEED,   21, 21, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-        robot.leftIntake.setPower(0.8);
-        robot.rightIntake.setPower(-0.8);
-
-        sleep(1000);
-        encoderDrive(0.3,   9, 9, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-        robot.left_hand.setPosition(0.8);
-        robot.right_hand.setPosition(0.2);
-        encoderDrive(DRIVE_SPEED,   -15, -15, 4.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(-67,TURN_SPEED);
+        encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+//        robot.left_hand.setPosition(0.8);
+//        robot.right_hand.setPosition(0.2);
+        encoderDrive(DRIVE_SPEED,   -13, -13, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(67,TURN_SPEED);
 //        sleep(4000);
-        robot.pickup.setPosition(0.25);
+//        robot.pickup.setPosition(0.25);
+        robot.leftIntake.setPower(-0.0);
+        robot.rightIntake.setPower(0.0);
+        encoderDrive(DRIVE_SPEED,23,23,4);
+        robot.leftIntake.setPower(-0.8);
+        robot.rightIntake.setPower(0.8);
+        encoderDrive(DRIVE_SPEED,   -23, -23,8.0);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
-        encoderDrive(DRIVE_SPEED,-52,-52,4);
-        rotate(66,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   6, 6,4.0);
-
-        robot.left_hand.setPosition(0.31);
-        robot.right_hand.setPosition(0.69);
-        vertElevator(-800);//pick up elevator
-        HorizontalElevator(0.95,-2500);//push out horelv
-        vertElevator(-500);//drop elevator
-        robot.pickup.setPosition(0.7);//open pickup
-        vertElevator(-800);//pickup elevator
-        HorizontalElevator(0.95,0);//pull in horelv
-        vertElevator(0);//drop elevator
-        rotate(-178,0.95);
-        encoderDrive(DRIVE_SPEED,8,8,4);
-        robot.left_hand.setPosition(0.8);
-        robot.right_hand.setPosition(0.2);
-        sleep (200);
+        rotate(-105,TURN_SPEED);
+        robot.leftIntake.setPower(0.8);
+        robot.rightIntake.setPower(-0.8);
+        encoderDrive(0.3,16,16,4);
+        encoderDrive(DRIVE_SPEED,16,16,4);
+        robot.leftIntake.setPower(0.0);
+        robot.rightIntake.setPower(0.0);
         encoderDrive(DRIVE_SPEED,   -4, -4,4.0);
-        rotate(66, TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   26, 26,4.0);
-        HorizontalElevator(0.95, -2800);
-        sleep(200);
-
-
-//        robot.leftIntake.setPower(0.6);
-//        robot.rightIntake.setPower(-0.6);
-//        encoderDrive(DRIVE_SPEED,   6, 6,4.0);
+        rotate(-30,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -23, -23,8.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

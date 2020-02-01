@@ -118,8 +118,8 @@ public class HardwareSky
         right_hand = hwMap.get(Servo.class, "right_hand");
         pickup = hwMap.get(Servo.class, "pick_up");
         capstone = hwMap.get(Servo.class, "cap_stone");
-        left_hand.setPosition(0.8);
-        right_hand.setPosition(0.2);
+        left_hand.setPosition(0.95);
+        right_hand.setPosition(0.1);
         pickup.setPosition(0.8);
         capstone.setPosition(0.4);
     }

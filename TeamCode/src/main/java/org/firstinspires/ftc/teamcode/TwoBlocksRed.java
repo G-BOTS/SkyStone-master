@@ -16,9 +16,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import java.nio.file.Watchable;
 
 @Autonomous
-@Disabled
+//@Disabled
 
-public class playelev extends LinearOpMode {
+public class TwoBlocksRed extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -60,13 +60,9 @@ public class playelev extends LinearOpMode {
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.horiElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.horiElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -107,30 +103,42 @@ public class playelev extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
+        robot.leftIntake.setPower(0.8);
+        robot.rightIntake.setPower(-0.8);
 
-        robot.horiElv.setTargetPosition(-2000);//negative target is going out, positive is going in
-        robot.horiElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.horiElv.setPower(0.95);//positive is moving in
-        sleep(2000);
-        robot.horiElv.setPower(0);
-        robot.horiElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.horiElv.setTargetPosition(0);//negative target is going out, positive is going in
-        robot.horiElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.horiElv.setPower(0.95);//positive is moving in
-        sleep(2000);
-        robot.horiElv.setPower(0);
-        robot.horiElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        HorizontalElevator(0.95,-2000);
-        HorizontalElevator(0.95,0);
-        vertElevator(-500);
-        vertElevator(0);
+//        robot.left_hand.setPosition(0.31);
+//        robot.right_hand.setPosition(0.69);
+        encoderDrive(DRIVE_SPEED,   21, 21, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+        rotate(-67,TURN_SPEED);
+        robot.leftIntake.setPower(-0.0);
+        robot.rightIntake.setPower(0.0);
+        encoderDrive(DRIVE_SPEED,30,30,4);
+        robot.leftIntake.setPower(-0.8);//outake
+        robot.rightIntake.setPower(0.8);
+        encoderDrive(DRIVE_SPEED,   -23, -23,8.0);
+        robot.leftIntake.setPower(0.0);
+        robot.rightIntake.setPower(0.0);
+        rotate(110,TURN_SPEED);
+        robot.leftIntake.setPower(0.8);//intake
+        robot.rightIntake.setPower(-0.8);
+        encoderDrive(DRIVE_SPEED,14,14,4);
+        rotate(24,TURN_SPEED);
+        encoderDrive(0.3,4,4,4);
+        rotate(-45,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,-10,-10,4);
+        robot.leftIntake.setPower(0.0);
+        robot.rightIntake.setPower(0.0);
+        rotate(40,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -30, -30,8.0);
+        rotate(-66,TURN_SPEED);
+        robot.leftIntake.setPower(-0.8);//outake
+        robot.rightIntake.setPower(0.8);
+        rotate(-66,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,-12,-12,4.0);
 
-//        robot.horiElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        robot.horiElv.setTargetPosition(0);
-//        robot.horiElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        robot.horiElv.setPower(0.3)
-
-        telemetry.addData("Path", robot.horiElv.getCurrentPosition());
+        telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
@@ -201,10 +209,10 @@ public class playelev extends LinearOpMode {
             robot.horiElv.setTargetPosition(elTarget);
             robot.horiElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.horiElv.setPower(elPower);
-          while(opModeIsActive()&&robot.horiElv.isBusy()){
-              telemetry.addData("horielv" ,robot.horiElv.getCurrentPosition() );
-              telemetry.update();
-          }
+            while(opModeIsActive()&&robot.horiElv.isBusy()){
+                telemetry.addData("horielv" ,robot.horiElv.getCurrentPosition() );
+                telemetry.update();
+            }
 
         }
         robot.horiElv.setPower(0);
@@ -220,9 +228,9 @@ public class playelev extends LinearOpMode {
             robot.leftElv.setPower(0.95);
             robot.rightElv.setPower(0.95);
 
-             while(opModeIsActive()&&robot.leftElv.isBusy()&&robot.rightElv.isBusy()){
+            while(opModeIsActive()&&robot.leftElv.isBusy()&&robot.rightElv.isBusy()){
                 telemetry.addData("left" ,robot.leftElv.getCurrentPosition() );
-                 telemetry.addData("right" ,robot.rightElv.getCurrentPosition() );
+                telemetry.addData("right" ,robot.rightElv.getCurrentPosition() );
                 telemetry.update();
             }
 
@@ -233,6 +241,8 @@ public class playelev extends LinearOpMode {
         robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
+
+
 
     private void resetAngle() {
         lastAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -333,7 +343,7 @@ public class playelev extends LinearOpMode {
         robot.rightDrive.setPower(0);
 
         // wait for rotation to stop.
-        sleep(1000);
+        sleep(200);
 
         // reset angle tracking on new heading.
         resetAngle();

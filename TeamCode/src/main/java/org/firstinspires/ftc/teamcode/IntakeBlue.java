@@ -18,7 +18,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class IntakeMod extends LinearOpMode {
+public class IntakeBlue extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -127,7 +127,7 @@ public class IntakeMod extends LinearOpMode {
         encoderDrive(DRIVE_SPEED,   6, 6,4.0);
 
         robot.left_hand.setPosition(0.31);
-        robot.right_hand.setPosition(0.69);
+        robot.right_hand.setPosition(0.74);
         vertElevator(-800);//pick up elevator
         HorizontalElevator(0.95,-2500);//push out horelv
         vertElevator(-500);//drop elevator
@@ -135,7 +135,7 @@ public class IntakeMod extends LinearOpMode {
         vertElevator(-800);//pickup elevator
         HorizontalElevator(0.95,0);//pull in horelv
         vertElevator(0);//drop elevator
-        rotate(-178,0.95);
+        rotate(-178,1.0);
         encoderDrive(DRIVE_SPEED,8,8,4);
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);

@@ -18,7 +18,7 @@ import java.nio.file.Watchable;
 @Autonomous
 //@Disabled
 
-public class TwoBlocks extends LinearOpMode {
+public class TwoBlocksBlue extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -110,30 +110,33 @@ public class TwoBlocks extends LinearOpMode {
 //        robot.right_hand.setPosition(0.69);
         encoderDrive(DRIVE_SPEED,   21, 21, 5.0);  // S1:  24 Drive forward 4 Sec timeout
         encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-//        robot.left_hand.setPosition(0.8);
-//        robot.right_hand.setPosition(0.2);
-        encoderDrive(DRIVE_SPEED,   -13, -13, 4.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
         rotate(67,TURN_SPEED);
-//        sleep(4000);
-//        robot.pickup.setPosition(0.25);
         robot.leftIntake.setPower(-0.0);
         robot.rightIntake.setPower(0.0);
-        encoderDrive(DRIVE_SPEED,23,23,4);
-        robot.leftIntake.setPower(-0.8);
+        encoderDrive(DRIVE_SPEED,30,30,4);
+        robot.leftIntake.setPower(-0.8);//outake
         robot.rightIntake.setPower(0.8);
         encoderDrive(DRIVE_SPEED,   -23, -23,8.0);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
         rotate(-105,TURN_SPEED);
-        robot.leftIntake.setPower(0.8);
+        robot.leftIntake.setPower(0.8);//intake
         robot.rightIntake.setPower(-0.8);
-        encoderDrive(0.3,16,16,4);
-        encoderDrive(DRIVE_SPEED,16,16,4);
+        encoderDrive(DRIVE_SPEED,14,14,4);
+        rotate(-20,TURN_SPEED);
+//        encoderDrive(0.3,2,2,4);
+        rotate(35,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,-10,-10,4);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
-        encoderDrive(DRIVE_SPEED,   -4, -4,4.0);
-        rotate(-30,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,   -23, -23,8.0);
+        rotate(-42,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,   -30, -30,8.0);
+        rotate(66,TURN_SPEED);
+        robot.leftIntake.setPower(-0.8);//outake
+        robot.rightIntake.setPower(0.8);
+        rotate(66,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,-12,-12,4.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

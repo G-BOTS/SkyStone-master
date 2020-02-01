@@ -135,14 +135,11 @@ public class TeleopSky extends OpMode {
 
         if (gamepad1.right_bumper) {
             robot.left_hand.setPosition(0.31);
-            robot.right_hand.setPosition(0.68);
+            robot.right_hand.setPosition(0.74); //used to be 68
         } else if (gamepad1.left_bumper) {
             robot.left_hand.setPosition(0.8);
             robot.right_hand.setPosition(0.2);
-        }   //else  {
-        // robot.left_hand.setPosition(0.5);
-        //  robot.right_hand.setPosition(0.5);
-        //}
+        }
 
 
         /*if (gamepad1.a)   {

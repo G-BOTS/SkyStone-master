@@ -108,7 +108,7 @@ public class TwoBlocksRed extends LinearOpMode {
 
 //        robot.left_hand.setPosition(0.31);
 //        robot.right_hand.setPosition(0.69);
-        encoderDrive(DRIVE_SPEED,   21, 21, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   23, 23, 5.0);  // S1:  24 Drive forward 4 Sec timeout
         encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
         encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
         rotate(-67,TURN_SPEED);
@@ -123,11 +123,11 @@ public class TwoBlocksRed extends LinearOpMode {
         rotate(110,TURN_SPEED);
         robot.leftIntake.setPower(0.8);//intake
         robot.rightIntake.setPower(-0.8);
-        encoderDrive(DRIVE_SPEED,14,14,4);
+        encoderDrive(DRIVE_SPEED,13,13,4); // org 14, drives toward 2nd stone and wall
         rotate(24,TURN_SPEED);
-        encoderDrive(0.3,4,4,4);
-        rotate(-45,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,-10,-10,4);
+//        encoderDrive(0.3,4,4,4);
+        rotate(-35,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,-12,-12,4);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
         rotate(40,TURN_SPEED);

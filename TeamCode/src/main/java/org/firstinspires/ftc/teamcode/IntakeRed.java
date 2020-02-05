@@ -134,13 +134,13 @@ public class IntakeRed extends LinearOpMode {
         vertElevator(-800);//pickup elevator
         HorizontalElevator(0.95,0);//pull in horelv
         vertElevator(0);//drop elevator
-        rotate(178,0.95);
+        rotate(178,0.98); //turn foundation
         encoderDrive(DRIVE_SPEED,8,8,4);
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);
         sleep (200);
         encoderDrive(DRIVE_SPEED,   -4, -4,4.0);
-        rotate(-66, TURN_SPEED);
+        rotate(-63, TURN_SPEED);
         encoderDrive(DRIVE_SPEED,   26, 26,4.0);
         HorizontalElevator(0.95, -2800);
         sleep(200);

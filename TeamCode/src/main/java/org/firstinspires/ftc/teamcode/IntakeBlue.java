@@ -135,7 +135,7 @@ public class IntakeBlue extends LinearOpMode {
         vertElevator(-800);//pickup elevator
         HorizontalElevator(0.95,0);//pull in horelv
         vertElevator(0);//drop elevator
-        rotate(-178,1.0);
+        rotate(-178,0.98); //turn foundation
         encoderDrive(DRIVE_SPEED,8,8,4);
         robot.left_hand.setPosition(0.8);
         robot.right_hand.setPosition(0.2);

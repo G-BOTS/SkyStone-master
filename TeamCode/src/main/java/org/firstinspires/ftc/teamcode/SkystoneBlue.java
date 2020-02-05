@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.Color;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -11,14 +14,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import java.nio.file.Watchable;
+import java.util.Locale;
 
 @Autonomous
 //@Disabled
 
-public class TwoBlocksBlue extends LinearOpMode {
+public class SkystoneBlue extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareSky robot = new HardwareSky();   // Use  Skybot hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -31,16 +36,22 @@ public class TwoBlocksBlue extends LinearOpMode {
     static final double DRIVE_SPEED = 0.6;
     static final double TURN_SPEED = 0.4;
     static final double INTAKE_SPEED = 0.6;
+    ColorSensor sensorColor;
+    float[] hsvValues = {0F, 0F, 0F};// hsvValues is an array that will hold the hue, saturation, and value information.
+    final float[] values = hsvValues; // values is a reference to the hsvValues array.
+    final double SCALE_FACTOR = 255;
+
     BNO055IMU imu;
     Orientation lastAngles = new Orientation();
     double globalAngle, power = 0.50, correction;
-
+    int indicator = 1;
     boolean aButton, bButton, touched;
+
 
 
     //DigitalChannel digitalTouch;
 
-    @Override
+//    @Override
     public void runOpMode() {
 
         /*
@@ -48,6 +59,7 @@ public class TwoBlocksBlue extends LinearOpMode {
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
+        sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
 
         //digitalTouch = HardwareSky.get(DigitalChannel.class, "sensor_digital");
 
@@ -66,6 +78,8 @@ public class TwoBlocksBlue extends LinearOpMode {
         robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        ColorSensor sensorColor;
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0", "Starting at %7d :%7d",
@@ -103,13 +117,45 @@ public class TwoBlocksBlue extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        robot.leftIntake.setPower(0.8);
-        robot.rightIntake.setPower(-0.8);
+        /*while (opModeIsActive()) {
+            // convert the RGB values to HSV values.
+            // multiply by the SCALE_FACTOR.
+            // then cast it back to int (SCALE_FACTOR is a double)
+            Color.RGBToHSV((int)(sensorColor.red() * SCALE_FACTOR),
+                    (int) (sensorColor.green() * SCALE_FACTOR),
+                    (int) (sensorColor.blue() * SCALE_FACTOR),
+                    hsvValues);
+
+            // send the info back to driver station using telemetry function.
+//            telemetry.addData("Distance (cm)",
+//                    String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
+            telemetry.addData("Alpha", sensorColor.alpha());
+            telemetry.addData("Red  ", sensorColor.red());
+            telemetry.addData("Green", sensorColor.green());
+            telemetry.addData("Blue ", sensorColor.blue());
+            telemetry.addData("Hue", hsvValues[0]);
+
+            // change the background color to match the color detected by the RGB sensor.
+            // pass a reference to the hue, saturation, and value array as an argument
+            // to the HSVToColor method.
+//            relativeLayout.post(new Runnable() {
+//                public void run() {
+//                    relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
+
+
+
+            telemetry.update();
+        }
+
+         */
 
 //        robot.left_hand.setPosition(0.31);
 //        robot.right_hand.setPosition(0.69);
-        encoderDrive(DRIVE_SPEED,   22, 22, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-        encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,   20, 20, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        if (indicator == 1) {
+        robot.leftIntake.setPower(0.8);
+        robot.rightIntake.setPower(-0.8);
+            encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
         encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
         rotate(67,TURN_SPEED);
         robot.leftIntake.setPower(-0.0);
@@ -117,29 +163,97 @@ public class TwoBlocksBlue extends LinearOpMode {
         encoderDrive(DRIVE_SPEED,30,30,4);
         robot.leftIntake.setPower(-0.8);//outake
         robot.rightIntake.setPower(0.8);
-        encoderDrive(DRIVE_SPEED,   -23, -23,8.0);
+        encoderDrive(DRIVE_SPEED,   -48, -48,8.0);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
-        rotate(-105,TURN_SPEED);
+        rotate(-110,TURN_SPEED);
         robot.leftIntake.setPower(0.8);//intake
         robot.rightIntake.setPower(-0.8);
-        encoderDrive(DRIVE_SPEED,13,13,4); // org 14, drives toward 2nd stone and wall
-        rotate(-20,TURN_SPEED);
-//        encoderDrive(0.3,2,2,4);
-        rotate(35,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,-13,-13,4);
+        encoderDrive(DRIVE_SPEED,7,7,4); // org 14, drives toward 2nd stone and wall
+        rotate(24,TURN_SPEED);
+        encoderDrive(0.3,-4,-4,4);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
-        rotate(-30,TURN_SPEED); // org -42, small right turn before it goes under the bridge
-        encoderDrive(DRIVE_SPEED,   -30, -30,8.0);
-        rotate(66,TURN_SPEED);
-        robot.leftIntake.setPower(-0.8);//outake
-        robot.rightIntake.setPower(0.8);
-        rotate(66,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,-12,-12,4.0);
+        rotate(68,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,60,60,8);
+        rotate(40,TURN_SPEED);
+            robot.leftIntake.setPower(-0.8);//outake
+            robot.rightIntake.setPower(0.8);
+        rotate(-40, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED,   -10, -10,8.0);
+//        rotate(-66,TURN_SPEED);
+//        rotate(-66,TURN_SPEED);
+//        encoderDrive(DRIVE_SPEED,-12,-12,4.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
+    }
+        if( indicator == 2) {
+            encoderDrive(DRIVE_SPEED,   -4, -4, 5.0);
+            rotate(-25,TURN_SPEED);
+            encoderDrive(0.3,   4, 4, 5.0);
+            robot.leftIntake.setPower(0.8);
+            robot.rightIntake.setPower(-0.8);
+            encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+            encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+            rotate(77,TURN_SPEED);
+            robot.leftIntake.setPower(-0.0);
+            robot.rightIntake.setPower(0.0);
+            encoderDrive(DRIVE_SPEED,42,42,8);
+            robot.leftIntake.setPower(-0.8);//outake
+            robot.rightIntake.setPower(0.8);
+            encoderDrive(DRIVE_SPEED,   -52, -52,8);
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+            rotate(-110,TURN_SPEED);
+            robot.leftIntake.setPower(0.8);//intake
+            robot.rightIntake.setPower(-0.8);
+            encoderDrive(DRIVE_SPEED,7,7,4); // org 14, drives toward 2nd stone and wall
+            rotate(24,TURN_SPEED);
+            encoderDrive(0.3,-4,-4,4);
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+            rotate(68,TURN_SPEED);
+            encoderDrive(DRIVE_SPEED,60,60,4);
+            rotate(40,TURN_SPEED);
+            robot.leftIntake.setPower(-0.8);//outake
+            robot.rightIntake.setPower(0.8);
+            rotate(-40, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED,   -10, -10,8.0);
+        }
+        if (indicator == 3) {
+            encoderDrive(DRIVE_SPEED,   -4, -4, 5.0);
+            rotate(-40,TURN_SPEED);
+            encoderDrive(0.3,   4, 4, 5.0);
+            robot.leftIntake.setPower(0.8);
+            robot.rightIntake.setPower(-0.8);
+            encoderDrive(0.3,   4, 4, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+            encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+            rotate(87,TURN_SPEED);
+            robot.leftIntake.setPower(-0.0);
+            robot.rightIntake.setPower(0.0);
+            encoderDrive(DRIVE_SPEED,54,54,8);
+            robot.leftIntake.setPower(-0.8);//outake
+            robot.rightIntake.setPower(0.8);
+            encoderDrive(DRIVE_SPEED,   -60, -60,8);
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+            rotate(-110,TURN_SPEED);
+            robot.leftIntake.setPower(0.8);//intake
+            robot.rightIntake.setPower(-0.8);
+            encoderDrive(DRIVE_SPEED,7,7,4); // org 14, drives toward 2nd stone and wall
+            rotate(24,TURN_SPEED);
+            encoderDrive(0.3,-4,-4,4);
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+            rotate(68,TURN_SPEED);
+            encoderDrive(DRIVE_SPEED,60,60,4);
+            rotate(40,TURN_SPEED);
+            robot.leftIntake.setPower(-0.8);//outake
+            robot.rightIntake.setPower(0.8);
+            rotate(-40, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED,   -10, -10,8.0);
+        }
     }
 
     /*

@@ -20,29 +20,35 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import static org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot.MID_SERVO;
 
-public class HardwareSky
-
-{
+public class HardwareSky {
     /* Public OpMode members. */
-    public DcMotor  leftDrive   = null;
-    public DcMotor  rightDrive  = null;
+    public DcMotor leftDrive = null;
+    public DcMotor rightDrive = null;
     //public DcMotor  armDrive    = null;
-    public Servo    left_hand ; // = null;
-    public Servo    right_hand;//  = null;
+    public Servo left_hand; // = null;
+    public Servo right_hand;//  = null;
     //public DcMotor  leftIntake  = null;
-    public DcMotor  leftElv     = null;
-    public DcMotor  rightElv    = null;
+    public DcMotor leftElv = null;
+    public DcMotor rightElv = null;
     //public Servo    dropper;
-    public DcMotor  horiElv     = null;
-    public DcMotor  leftIntake  = null;
-    public DcMotor  rightIntake = null;
-    public Servo    pickup;
-    public Servo    capstone;
-   // public DistanceSensor sensorRange;
-   // public ColorSensor sensorColor;
-   // public TouchSensor sensorTouch;
+    public DcMotor horiElv = null;
+    public DcMotor leftIntake = null;
+    public DcMotor rightIntake = null;
+    public Servo pickup;
+    public Servo capstone;
+    ColorSensor sensorColor;
+//    public Servo serv40;
+//    public Servo serv41;
+//    public Servo serv42;
+//    public Servo serv43;
+//    public Servo serv44;
+//    public Servo serv45;
+//    public Servo serv24;
+//    public Servo serv25;
 
-
+    // public DistanceSensor sensorRange;
+    // public ColorSensor sensorColor;
+    // public TouchSensor sensorTouch;
 
 
     //DigitalChannel digitalTouch;
@@ -56,22 +62,24 @@ public class HardwareSky
     public static final double ARM_DOWN_POWER  = -0.45 ;*/
 
     /* local OpMode members. */
-    HardwareMap hwMap           =  null;
-    private ElapsedTime period  = new ElapsedTime();
+    HardwareMap hwMap = null;
+    private ElapsedTime period = new ElapsedTime();
 
 
     /* Constructor */
-    public HardwareSky(){
+    public HardwareSky() {
 
     }
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
-        // Save reference to Hardware map
+
+
+// Save reference to Hardware map
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftDrive  = hwMap.get(DcMotor.class, "left_drive");
+        leftDrive = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         //armDrive = hwMap.get(DcMotor.class, "arm_drive" );
         //leftIntake = hwMap.get(DcMotor.class, "left_intake");
@@ -83,7 +91,7 @@ public class HardwareSky
         leftIntake = hwMap.get(DcMotor.class, "left_intake");
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
 
-
+        sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
 
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
@@ -114,14 +122,30 @@ public class HardwareSky
         rightIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        left_hand  = hwMap.get(Servo.class, "left_hand");
+        left_hand = hwMap.get(Servo.class, "left_hand");
         right_hand = hwMap.get(Servo.class, "right_hand");
         pickup = hwMap.get(Servo.class, "pick_up");
         capstone = hwMap.get(Servo.class, "cap_stone");
+//        serv40 = hwMap.get(Servo.class, "serv40");
+//        serv41 = hwMap.get(Servo.class, "serv41");
+//        serv42 = hwMap.get(Servo.class, "serv42");
+//        serv43 = hwMap.get(Servo.class, "serv43");
+//        serv44 = hwMap.get(Servo.class, "serv44");
+//        serv45 = hwMap.get(Servo.class, "serv45");
+//        serv24 = hwMap.get(Servo.class, "serv24");
+//        serv25 = hwMap.get(Servo.class, "serv25");
         left_hand.setPosition(0.95);
         right_hand.setPosition(0.1);
         pickup.setPosition(0.8);
         capstone.setPosition(0.4);
+//        serv40.setPosition(0.5);
+//        serv41.setPosition(0.5);
+//        serv42.setPosition(0.5);
+//        serv43.setPosition(0.5);
+//        serv44.setPosition(0.5);
+//        serv45.setPosition(0.5);
+//        serv24.setPosition(0.5);
+//        serv25.setPosition(0.5);
+
     }
 }
-

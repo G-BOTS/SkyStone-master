@@ -44,7 +44,7 @@ public class SkystoneBlue extends LinearOpMode {
     BNO055IMU imu;
     Orientation lastAngles = new Orientation();
     double globalAngle, power = 0.50, correction;
-    int indicator = 1;
+    int indicator = 3;
     boolean aButton, bButton, touched;
 
 
@@ -163,7 +163,7 @@ public class SkystoneBlue extends LinearOpMode {
         encoderDrive(DRIVE_SPEED,30,30,4);
         robot.leftIntake.setPower(-0.8);//outake
         robot.rightIntake.setPower(0.8);
-        encoderDrive(DRIVE_SPEED,   -48, -48,8.0);
+        encoderDrive(DRIVE_SPEED,   -40, -40,8.0);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
         rotate(-110,TURN_SPEED);
@@ -174,8 +174,8 @@ public class SkystoneBlue extends LinearOpMode {
         encoderDrive(0.3,-4,-4,4);
         robot.leftIntake.setPower(0.0);
         robot.rightIntake.setPower(0.0);
-        rotate(68,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,60,60,8);
+        rotate(72,TURN_SPEED);
+        encoderDrive(DRIVE_SPEED,44,44,8);
         rotate(40,TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
@@ -190,19 +190,19 @@ public class SkystoneBlue extends LinearOpMode {
     }
         if( indicator == 2) {
             encoderDrive(DRIVE_SPEED,   -4, -4, 5.0);
-            rotate(-25,TURN_SPEED);
+            rotate(-20,TURN_SPEED);
             encoderDrive(0.3,   4, 4, 5.0);
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
             encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
             encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(77,TURN_SPEED);
+            rotate(100,TURN_SPEED);
             robot.leftIntake.setPower(-0.0);
             robot.rightIntake.setPower(0.0);
-            encoderDrive(DRIVE_SPEED,42,42,8);
+            encoderDrive(DRIVE_SPEED,40,40,8);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            encoderDrive(DRIVE_SPEED,   -52, -52,8);
+            encoderDrive(DRIVE_SPEED,   -50, -50,8);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
             rotate(-110,TURN_SPEED);
@@ -213,7 +213,7 @@ public class SkystoneBlue extends LinearOpMode {
             encoderDrive(0.3,-4,-4,4);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(68,TURN_SPEED);
+            rotate(74,TURN_SPEED);
             encoderDrive(DRIVE_SPEED,60,60,4);
             rotate(40,TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
@@ -229,7 +229,7 @@ public class SkystoneBlue extends LinearOpMode {
             robot.rightIntake.setPower(-0.8);
             encoderDrive(0.3,   4, 4, 5.0);  // S1:  24 Drive forward 4 Sec timeout
             encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(87,TURN_SPEED);
+            rotate(120,TURN_SPEED);
             robot.leftIntake.setPower(-0.0);
             robot.rightIntake.setPower(0.0);
             encoderDrive(DRIVE_SPEED,54,54,8);
@@ -246,7 +246,7 @@ public class SkystoneBlue extends LinearOpMode {
             encoderDrive(0.3,-4,-4,4);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(68,TURN_SPEED);
+            rotate(74,TURN_SPEED);
             encoderDrive(DRIVE_SPEED,60,60,4);
             rotate(40,TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake

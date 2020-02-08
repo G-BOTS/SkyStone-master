@@ -44,14 +44,15 @@ public class SkystoneBlue extends LinearOpMode {
     BNO055IMU imu;
     Orientation lastAngles = new Orientation();
     double globalAngle, power = 0.50, correction;
-    int indicator = 3;
+    int indicator = 1;
+    int counter;
+    float HueValue, aveHue;
     boolean aButton, bButton, touched;
-
 
 
     //DigitalChannel digitalTouch;
 
-//    @Override
+    //    @Override
     public void runOpMode() {
 
         /*
@@ -79,7 +80,7 @@ public class SkystoneBlue extends LinearOpMode {
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        ColorSensor sensorColor;
+//        ColorSensor sensorColor;
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0", "Starting at %7d :%7d",
@@ -121,11 +122,16 @@ public class SkystoneBlue extends LinearOpMode {
             // convert the RGB values to HSV values.
             // multiply by the SCALE_FACTOR.
             // then cast it back to int (SCALE_FACTOR is a double)
-            Color.RGBToHSV((int)(sensorColor.red() * SCALE_FACTOR),
-                    (int) (sensorColor.green() * SCALE_FACTOR),
-                    (int) (sensorColor.blue() * SCALE_FACTOR),
-                    hsvValues);
-
+            HueValue = 0;
+            aveHue = 0;
+            for (counter = 0; counter < 10; counter++) {
+                Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
+                        (int) (sensorColor.green() * SCALE_FACTOR),
+                        (int) (sensorColor.blue() * SCALE_FACTOR),
+                        hsvValues);
+                HueValue = HueValue + hsvValues[0];
+            }
+            aveHue = (HueValue / 10);
             // send the info back to driver station using telemetry function.
 //            telemetry.addData("Distance (cm)",
 //                    String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
@@ -133,7 +139,7 @@ public class SkystoneBlue extends LinearOpMode {
             telemetry.addData("Red  ", sensorColor.red());
             telemetry.addData("Green", sensorColor.green());
             telemetry.addData("Blue ", sensorColor.blue());
-            telemetry.addData("Hue", hsvValues[0]);
+            telemetry.addData("ave", aveHue);
 
             // change the background color to match the color detected by the RGB sensor.
             // pass a reference to the hue, saturation, and value array as an argument
@@ -143,124 +149,160 @@ public class SkystoneBlue extends LinearOpMode {
 //                    relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
 
 
-
             telemetry.update();
-        }
+        }*/
 
-         */
 
 //        robot.left_hand.setPosition(0.31);
 //        robot.right_hand.setPosition(0.69);
-        encoderDrive(DRIVE_SPEED,   20, 20, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 20, 20, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        HueValue = 0;
+        aveHue = 0;
+        for (counter = 0; counter < 10; counter++) {
+            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
+                    (int) (sensorColor.green() * SCALE_FACTOR),
+                    (int) (sensorColor.blue() * SCALE_FACTOR),
+                    hsvValues);
+            HueValue = HueValue + hsvValues[0];
+        }
+        aveHue = (HueValue / 10);
+        if (aveHue > 80) {
+            indicator = 1;
+
+        } else {
+            encoderDrive(DRIVE_SPEED, -4, -4, 5.0);
+            rotate(-20, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 6, 6, 5);
+            HueValue = 0;
+            aveHue = 0;
+            for (counter = 0; counter < 10; counter++) {
+                Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
+                        (int) (sensorColor.green() * SCALE_FACTOR),
+                        (int) (sensorColor.blue() * SCALE_FACTOR),
+                        hsvValues);
+                HueValue = HueValue + hsvValues[0];
+            }
+
+            aveHue = (HueValue / 10);
+            if (aveHue > 80) {
+                indicator = 2;
+            } else {
+                indicator = 3;
+            }
+        }
+        telemetry.addData("ind", indicator);
+        telemetry.update();
         if (indicator == 1) {
-        robot.leftIntake.setPower(0.8);
-        robot.rightIntake.setPower(-0.8);
-            encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-        encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-        rotate(67,TURN_SPEED);
-        robot.leftIntake.setPower(-0.0);
-        robot.rightIntake.setPower(0.0);
-        encoderDrive(DRIVE_SPEED,30,30,4);
-        robot.leftIntake.setPower(-0.8);//outake
-        robot.rightIntake.setPower(0.8);
-        encoderDrive(DRIVE_SPEED,   -40, -40,8.0);
-        robot.leftIntake.setPower(0.0);
-        robot.rightIntake.setPower(0.0);
-        rotate(-110,TURN_SPEED);
-        robot.leftIntake.setPower(0.8);//intake
-        robot.rightIntake.setPower(-0.8);
-        encoderDrive(DRIVE_SPEED,7,7,4); // org 14, drives toward 2nd stone and wall
-        rotate(24,TURN_SPEED);
-        encoderDrive(0.3,-4,-4,4);
-        robot.leftIntake.setPower(0.0);
-        robot.rightIntake.setPower(0.0);
-        rotate(72,TURN_SPEED);
-        encoderDrive(DRIVE_SPEED,44,44,8);
-        rotate(40,TURN_SPEED);
+            robot.leftIntake.setPower(0.8);
+            robot.rightIntake.setPower(-0.8);
+            encoderDrive(0.3, 7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+            rotate(67, TURN_SPEED);
+            robot.leftIntake.setPower(-0.0);
+            robot.rightIntake.setPower(0.0);
+            encoderDrive(DRIVE_SPEED, 30, 30, 4);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-        rotate(-40, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED,   -10, -10,8.0);
+            encoderDrive(DRIVE_SPEED, -40, -40, 8.0);
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+            rotate(-110, TURN_SPEED);
+            robot.leftIntake.setPower(0.8);//intake
+            robot.rightIntake.setPower(-0.8);
+            encoderDrive(DRIVE_SPEED, 7, 7, 4); // org 14, drives toward 2nd stone and wall
+            rotate(24, TURN_SPEED);
+            encoderDrive(0.3, -4, -4, 4);
+            robot.leftIntake.setPower(0.0);
+            robot.rightIntake.setPower(0.0);
+            rotate(76, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 44, 44, 8);
+            rotate(40, TURN_SPEED);
+            robot.leftIntake.setPower(-0.8);//outake
+            robot.rightIntake.setPower(0.8);
+            rotate(-40, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
 //        rotate(-66,TURN_SPEED);
 //        rotate(-66,TURN_SPEED);
 //        encoderDrive(DRIVE_SPEED,-12,-12,4.0);
 
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
-    }
-        if( indicator == 2) {
-            encoderDrive(DRIVE_SPEED,   -4, -4, 5.0);
-            rotate(-20,TURN_SPEED);
-            encoderDrive(0.3,   4, 4, 5.0);
+
+        }
+        if (indicator == 2) {
+
+            encoderDrive(0.3, 2, 2, 5.0);
+            rotate(10,TURN_SPEED);
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(0.3,   7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-            encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(100,TURN_SPEED);
+            encoderDrive(0.3, 2, 2, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+            rotate(-10,TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+            rotate(118, TURN_SPEED);
             robot.leftIntake.setPower(-0.0);
             robot.rightIntake.setPower(0.0);
-            encoderDrive(DRIVE_SPEED,40,40,8);
+            encoderDrive(DRIVE_SPEED, 30, 30, 8);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            encoderDrive(DRIVE_SPEED,   -50, -50,8);
+            encoderDrive(DRIVE_SPEED, -50, -50, 8);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(-110,TURN_SPEED);
+            rotate(-110, TURN_SPEED);
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(DRIVE_SPEED,7,7,4); // org 14, drives toward 2nd stone and wall
-            rotate(24,TURN_SPEED);
-            encoderDrive(0.3,-4,-4,4);
+            encoderDrive(DRIVE_SPEED, 7, 7, 4); // org 14, drives toward 2nd stone and wall
+            rotate(24, TURN_SPEED);
+            encoderDrive(0.3, -4, -4, 4);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(74,TURN_SPEED);
-            encoderDrive(DRIVE_SPEED,60,60,4);
-            rotate(40,TURN_SPEED);
+            rotate(74, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 60, 60, 4);
+            rotate(40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
             rotate(-40, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED,   -10, -10,8.0);
+            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
+
         }
         if (indicator == 3) {
-            encoderDrive(DRIVE_SPEED,   -2, -2, 5.0);
-            rotate(-35,TURN_SPEED);
-            encoderDrive(0.3,   8, 8, 5.0);
+            encoderDrive(DRIVE_SPEED, -2, -2, 5.0);
+            rotate(-35, TURN_SPEED);
+            encoderDrive(0.3, 8, 8, 5.0);
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
-            rotate(10,TURN_SPEED);
-            encoderDrive(0.3,   2, 2, 5.0);
-            rotate(-10,TURN_SPEED);
-            encoderDrive(0.3,   4, 4, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-            encoderDrive(DRIVE_SPEED,   -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(125,TURN_SPEED);
+            rotate(10, TURN_SPEED);
+            encoderDrive(0.3, 2, 2, 5.0);
+            rotate(-10, TURN_SPEED);
+            encoderDrive(0.3, 4, 4, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+            rotate(125, TURN_SPEED);
             robot.leftIntake.setPower(-0.0);
             robot.rightIntake.setPower(0.0);
-            encoderDrive(DRIVE_SPEED,34,34,8);
+            encoderDrive(DRIVE_SPEED, 34, 34, 8);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            encoderDrive(DRIVE_SPEED,   -46, -46,8);
+            encoderDrive(DRIVE_SPEED, -46, -46, 8);
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            rotate(-110,TURN_SPEED);
-            encoderDrive(DRIVE_SPEED,4,4,5.0);
-            rotate(10,TURN_SPEED);
-            encoderDrive(0.3,   2, 2, 5.0);
-            rotate(-40,TURN_SPEED);
-            encoderDrive(0.3,   4, 4, 5.0);  //
+            rotate(-110, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 4, 4, 5.0);
+            rotate(10, TURN_SPEED);
+            encoderDrive(0.3, 2, 2, 5.0);
+            rotate(-40, TURN_SPEED);
+            encoderDrive(0.3, 4, 4, 5.0);  //
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(DRIVE_SPEED,7,7,4); // org 14, drives toward 2nd stone and wall
-            rotate(24,TURN_SPEED);
-            encoderDrive(0.3,-4,-4,4);
+            encoderDrive(DRIVE_SPEED, 7, 7, 4); // org 14, drives toward 2nd stone and wall
+            rotate(24, TURN_SPEED);
+            encoderDrive(0.3, -4, -4, 4);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(74,TURN_SPEED);
-            encoderDrive(DRIVE_SPEED,42,42,4);
-            rotate(40,TURN_SPEED);
+            rotate(74, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 42, 42, 4);
+            rotate(40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
             rotate(-40, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED,   -10, -10,8.0);
+            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
+
         }
     }
 
@@ -307,11 +349,11 @@ public class SkystoneBlue extends LinearOpMode {
                     (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
-                telemetry.addData("Path2", "Running at %7d :%7d",
-                        robot.leftDrive.getCurrentPosition(),
-                        robot.rightDrive.getCurrentPosition());
-                telemetry.update();
+//                telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
+//                telemetry.addData("Path2", "Running at %7d :%7d",
+//                        robot.leftDrive.getCurrentPosition(),
+//                        robot.rightDrive.getCurrentPosition());
+//                telemetry.update();
             }
 
             // Stop all motion;
@@ -327,12 +369,12 @@ public class SkystoneBlue extends LinearOpMode {
     }
 
     public void HorizontalElevator(double elPower, int elTarget) {
-        if (opModeIsActive()|| robot.horiElv.isBusy()) {
+        if (opModeIsActive() || robot.horiElv.isBusy()) {
             robot.horiElv.setTargetPosition(elTarget);
             robot.horiElv.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.horiElv.setPower(elPower);
-            while(opModeIsActive()&&robot.horiElv.isBusy()){
-                telemetry.addData("horielv" ,robot.horiElv.getCurrentPosition() );
+            while (opModeIsActive() && robot.horiElv.isBusy()) {
+                telemetry.addData("horielv", robot.horiElv.getCurrentPosition());
                 telemetry.update();
             }
 
@@ -341,7 +383,8 @@ public class SkystoneBlue extends LinearOpMode {
         robot.horiElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
-    public void vertElevator( int upTarget) {
+
+    public void vertElevator(int upTarget) {
         if (opModeIsActive()) {
             robot.leftElv.setTargetPosition(upTarget);
             robot.rightElv.setTargetPosition(upTarget);
@@ -350,9 +393,9 @@ public class SkystoneBlue extends LinearOpMode {
             robot.leftElv.setPower(0.95);
             robot.rightElv.setPower(0.95);
 
-            while(opModeIsActive()&&robot.leftElv.isBusy()&&robot.rightElv.isBusy()){
-                telemetry.addData("left" ,robot.leftElv.getCurrentPosition() );
-                telemetry.addData("right" ,robot.rightElv.getCurrentPosition() );
+            while (opModeIsActive() && robot.leftElv.isBusy() && robot.rightElv.isBusy()) {
+                telemetry.addData("left", robot.leftElv.getCurrentPosition());
+                telemetry.addData("right", robot.rightElv.getCurrentPosition());
                 telemetry.update();
             }
 
@@ -363,7 +406,6 @@ public class SkystoneBlue extends LinearOpMode {
         robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
-
 
 
     private void resetAngle() {

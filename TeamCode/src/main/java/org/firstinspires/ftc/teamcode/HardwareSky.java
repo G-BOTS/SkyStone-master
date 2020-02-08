@@ -36,7 +36,7 @@ public class HardwareSky {
     public DcMotor rightIntake = null;
     public Servo pickup;
     public Servo capstone;
-//    public ColorSensor sensorColor;
+    public ColorSensor sensorColor;
 //    public Servo serv40;
 //    public Servo serv41;
 //    public Servo serv42;
@@ -91,8 +91,8 @@ public class HardwareSky {
         leftIntake = hwMap.get(DcMotor.class, "left_intake");
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
 
-//        sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
-//
+       sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
+
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors

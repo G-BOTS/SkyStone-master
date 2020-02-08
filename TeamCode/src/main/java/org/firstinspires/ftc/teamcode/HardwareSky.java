@@ -36,7 +36,7 @@ public class HardwareSky {
     public DcMotor rightIntake = null;
     public Servo pickup;
     public Servo capstone;
-    ColorSensor sensorColor;
+//    public ColorSensor sensorColor;
 //    public Servo serv40;
 //    public Servo serv41;
 //    public Servo serv42;
@@ -91,8 +91,8 @@ public class HardwareSky {
         leftIntake = hwMap.get(DcMotor.class, "left_intake");
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
 
-        sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
-
+//        sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
+//
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
@@ -126,26 +126,11 @@ public class HardwareSky {
         right_hand = hwMap.get(Servo.class, "right_hand");
         pickup = hwMap.get(Servo.class, "pick_up");
         capstone = hwMap.get(Servo.class, "cap_stone");
-//        serv40 = hwMap.get(Servo.class, "serv40");
-//        serv41 = hwMap.get(Servo.class, "serv41");
-//        serv42 = hwMap.get(Servo.class, "serv42");
-//        serv43 = hwMap.get(Servo.class, "serv43");
-//        serv44 = hwMap.get(Servo.class, "serv44");
-//        serv45 = hwMap.get(Servo.class, "serv45");
-//        serv24 = hwMap.get(Servo.class, "serv24");
-//        serv25 = hwMap.get(Servo.class, "serv25");
+//
         left_hand.setPosition(0.95);
         right_hand.setPosition(0.1);
         pickup.setPosition(0.8);
         capstone.setPosition(0.4);
-//        serv40.setPosition(0.5);
-//        serv41.setPosition(0.5);
-//        serv42.setPosition(0.5);
-//        serv43.setPosition(0.5);
-//        serv44.setPosition(0.5);
-//        serv45.setPosition(0.5);
-//        serv24.setPosition(0.5);
-//        serv25.setPosition(0.5);
-
+//
     }
 }

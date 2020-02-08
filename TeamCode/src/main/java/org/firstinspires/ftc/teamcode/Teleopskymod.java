@@ -56,9 +56,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Sky: TeleopSky", group = "Pushbot")
+@TeleOp(name = "Sky: TeleopSky mod", group = "Pushbot")
 //@Disabled
-public class TeleopSky extends OpMode {
+public class Teleopskymod extends OpMode {
 
     /* Declare OpMode members. */
     HardwareSky robot = new HardwareSky(); // use the class created to define a Pushbot's hardware
@@ -108,7 +108,7 @@ public class TeleopSky extends OpMode {
 
     public void loop() {
         double left;
-        double right;
+        double right, upwards;
         int leftElvEnc;
         int rightElvEnc;
         double target_leftE;
@@ -120,10 +120,13 @@ public class TeleopSky extends OpMode {
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = -gamepad1.left_stick_y;
         right = -gamepad1.right_stick_y;
+        upwards = -gamepad2.left_stick_y;
 
 
         robot.leftDrive.setPower(left);
         robot.rightDrive.setPower(right);
+        robot.leftElv.setPower(upwards);
+        robot.rightElv.setPower((upwards));
 
         /*if (gamepad1.left_trigger > 0.1) {
             robot.armDrive.setPower(0.2);
@@ -142,9 +145,26 @@ public class TeleopSky extends OpMode {
         }
 
 
-
-
-
+        /*if (gamepad1.a)   {
+            robot.leftIntake.setPower(0.5);
+            robot.armDrive.setPower(0.5);
+        } else if (gamepad1.b){
+            robot.leftIntake.setPower(-0.5);
+            robot.armDrive.setPower(-0.5);
+        } else {
+            robot.leftIntake.setPower(0.0);
+            robot.armDrive.setPower(0.0); */
+        //}
+       /* if (gamepad1.y) { //D Pad controls the elevators speed as it gets close to the top
+            robot.leftElv.setPower(-0.6);
+            robot.rightElv.setPower(-0.6);
+        } else if (gamepad1.a) {
+            robot.leftElv.setPower(0.1);
+            robot.rightElv.setPower(0.1);
+        } else {
+            robot.leftElv.setPower(0.0);
+            robot.rightElv.setPower(0.0);
+        }*/
 
         if (gamepad1.right_trigger > 0.1) { // Trigger controls the main speed of the elevators speed
             robot.leftElv.setPower(-0.95);

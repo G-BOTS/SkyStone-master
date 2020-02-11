@@ -81,6 +81,8 @@ public class Teleopskymod extends OpMode {
         telemetry.addData("Say", "Hello Driver");//
         robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     /*
@@ -108,7 +110,9 @@ public class Teleopskymod extends OpMode {
 
     public void loop() {
         double left;
-        double right, upwards;
+        double right;
+        double upWards=0.3;
+        double downWards=-0.1;
         int leftElvEnc;
         int rightElvEnc;
         double target_leftE;
@@ -120,21 +124,14 @@ public class Teleopskymod extends OpMode {
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = -gamepad1.left_stick_y;
         right = -gamepad1.right_stick_y;
-        upwards = -gamepad2.left_stick_y;
+//        upwards = -gamepad2.left_stick_y;
 
 
         robot.leftDrive.setPower(left);
         robot.rightDrive.setPower(right);
-        robot.leftElv.setPower(upwards);
-        robot.rightElv.setPower((upwards));
+//        robot.leftElv.setPower(upwards);
+//        robot.rightElv.setPower((upwards));
 
-        /*if (gamepad1.left_trigger > 0.1) {
-            robot.armDrive.setPower(0.2);
-
-        } else if (gamepad1.right_trigger > 0.1) {
-            robot.armDrive.setPower(-0.2);
-        } else {
-            robot.armDrive.setPower(0); */
 
         if (gamepad1.right_bumper) {
             robot.left_hand.setPosition(0.31);
@@ -144,27 +141,6 @@ public class Teleopskymod extends OpMode {
             robot.right_hand.setPosition(0.2);
         }
 
-
-        /*if (gamepad1.a)   {
-            robot.leftIntake.setPower(0.5);
-            robot.armDrive.setPower(0.5);
-        } else if (gamepad1.b){
-            robot.leftIntake.setPower(-0.5);
-            robot.armDrive.setPower(-0.5);
-        } else {
-            robot.leftIntake.setPower(0.0);
-            robot.armDrive.setPower(0.0); */
-        //}
-       /* if (gamepad1.y) { //D Pad controls the elevators speed as it gets close to the top
-            robot.leftElv.setPower(-0.6);
-            robot.rightElv.setPower(-0.6);
-        } else if (gamepad1.a) {
-            robot.leftElv.setPower(0.1);
-            robot.rightElv.setPower(0.1);
-        } else {
-            robot.leftElv.setPower(0.0);
-            robot.rightElv.setPower(0.0);
-        }*/
 
         if (gamepad1.right_trigger > 0.1) { // Trigger controls the main speed of the elevators speed
             robot.leftElv.setPower(-0.95);
@@ -176,6 +152,8 @@ public class Teleopskymod extends OpMode {
             robot.leftElv.setPower(0.0);
             robot.rightElv.setPower(0.0);
         }
+
+
         if (gamepad2.right_bumper) {
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
@@ -186,6 +164,7 @@ public class Teleopskymod extends OpMode {
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
         }
+
         if (gamepad2.right_trigger > 0.1) {
             robot.horiElv.setPower(0.6);
         } else if (gamepad2.left_trigger > 0.1) {
@@ -210,27 +189,34 @@ public class Teleopskymod extends OpMode {
         rightElvEnc = robot.rightElv.getCurrentPosition();
         telemetry.addData("Left Elevator:", leftElvEnc);
         telemetry.addData("Right Elevator:", rightElvEnc);
-
     }
-    // Use gamepad left & right Bumpers to open and close the claw
+}
+
+
+        // Use gamepad left & right Bumpers to open and close the claw
         /*if (gamepad1.right_bumper)
             clawOffset += CLAW_SPEED;
         else if (gamepad1.left_bumper)
             clawOffset -= CLAW_SPEED;*/
 
-    // Move both servos to new position.  Assume servos are mirror image of each other.
+        // Move both servos to new position.  Assume servos are mirror image of each other.
        /* clawOffset = Range.clip(clawOffset, -0.5, 0.5);
         robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);*/
 
-    // Use gamepad buttons to move the arm up (Y) and down (A)
-        /*if (gamepad1.y)
-            robot.leftArm.setPower(robot.ARM_UP_POWER);
-        else if (gamepad1.a)
-            robot.leftArm.setPower(robot.ARM_DOWN_POWER);
-        else
-            robot.leftArm.setPower(0.0);*/
+        // Use gamepad buttons to move the arm up (Y) and down (A)
+        /*if (gamepad1.y) {
 
+            robot.leftElv.setPower(upWards);
+            robot.rightElv.setPower(upWards);
+        } else if (gamepad1.a) {
+
+            robot.leftElv.setPower(downWards);
+            robot.rightElv.setPower(downWards);
+        } else
+            robot.leftElv.setPower(0);
+            robot.rightElv.setPower(0);
+    }*/
     // Send telemetry message to signify robot running;
 
     //telemetry.addData("claw",  "Offset = %.2f", clawOffset);
@@ -266,4 +252,4 @@ public class Teleopskymod extends OpMode {
 //        }
 
 //    }
-}
+

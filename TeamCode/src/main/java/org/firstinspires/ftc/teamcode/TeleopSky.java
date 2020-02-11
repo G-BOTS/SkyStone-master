@@ -81,6 +81,8 @@ public class TeleopSky extends OpMode {
         telemetry.addData("Say", "Hello Driver");//
         robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     /*

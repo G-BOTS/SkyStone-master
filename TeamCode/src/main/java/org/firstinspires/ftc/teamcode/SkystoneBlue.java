@@ -79,6 +79,10 @@ public class SkystoneBlue extends LinearOpMode {
         robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
 
 //        ColorSensor sensorColor;
 
@@ -155,7 +159,8 @@ public class SkystoneBlue extends LinearOpMode {
 
 //        robot.left_hand.setPosition(0.31);
 //        robot.right_hand.setPosition(0.69);
-        encoderDrive(DRIVE_SPEED, 20, 20, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 19, 19, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+//        sleep(500);
         HueValue = 0;
         aveHue = 0;
         for (counter = 0; counter < 10; counter++) {
@@ -171,8 +176,9 @@ public class SkystoneBlue extends LinearOpMode {
 
         } else {
             encoderDrive(DRIVE_SPEED, -4, -4, 5.0);
-            rotate(-20, TURN_SPEED);
+            rotate(-14, TURN_SPEED);
             encoderDrive(DRIVE_SPEED, 6, 6, 5);
+//            sleep(500);
             HueValue = 0;
             aveHue = 0;
             for (counter = 0; counter < 10; counter++) {
@@ -209,17 +215,17 @@ public class SkystoneBlue extends LinearOpMode {
             rotate(-110, TURN_SPEED);
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(DRIVE_SPEED, 7, 7, 4); // org 14, drives toward 2nd stone and wall
+            encoderDrive(DRIVE_SPEED, 11, 11, 4); // org 14, drives toward 2nd stone and wall
             rotate(24, TURN_SPEED);
-            encoderDrive(0.3, -4, -4, 4);
+            encoderDrive(0.3, -7, -7, 4);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
             rotate(76, TURN_SPEED);
             encoderDrive(DRIVE_SPEED, 44, 44, 8);
-            rotate(40, TURN_SPEED);
+            rotate(-40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            rotate(-40, TURN_SPEED);
+            rotate(40, TURN_SPEED);
             encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
 //        rotate(-66,TURN_SPEED);
 //        rotate(-66,TURN_SPEED);
@@ -237,7 +243,7 @@ public class SkystoneBlue extends LinearOpMode {
             rotate(-10,TURN_SPEED);
             encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
             rotate(118, TURN_SPEED);
-            robot.leftIntake.setPower(-0.0);
+            robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
             encoderDrive(DRIVE_SPEED, 30, 30, 8);
             robot.leftIntake.setPower(-0.8);//outake
@@ -263,44 +269,49 @@ public class SkystoneBlue extends LinearOpMode {
 
         }
         if (indicator == 3) {
-            encoderDrive(DRIVE_SPEED, -2, -2, 5.0);
-            rotate(-35, TURN_SPEED);
-            encoderDrive(0.3, 8, 8, 5.0);
-            robot.leftIntake.setPower(0.8);
-            robot.rightIntake.setPower(-0.8);
-            rotate(10, TURN_SPEED);
-            encoderDrive(0.3, 2, 2, 5.0);
-            rotate(-10, TURN_SPEED);
+            rotate(14,TURN_SPEED);
+//            encoderDrive(DRIVE_SPEED, -2, -2, 5.0);
+//            rotate(-16, TURN_SPEED);
+            encoderDrive(0.3, 4, 4, 5.0);
+            encoderDrive(DRIVE_SPEED, -6, -6, 5.0);
+            rotate(-26, TURN_SPEED);    // Turns Right to face 1st Skystone
+            robot.leftIntake.setPower(0.8);   //Intakes 1st Skystone for Pattern A
+            robot.rightIntake.setPower(-0.8); //Intakes 1st Skystone for Pattern A
+//            rotate(10, TURN_SPEED);
+            encoderDrive(0.3, 4, 4, 5.0);// Drives forward towards 1st Skystone
+//            rotate(-10, TURN_SPEED);
             encoderDrive(0.3, 4, 4, 5.0);  // S1:  24 Drive forward 4 Sec timeout
             encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(125, TURN_SPEED);
-            robot.leftIntake.setPower(-0.0);
+            rotate(108, TURN_SPEED);
+            robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
             encoderDrive(DRIVE_SPEED, 34, 34, 8);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            encoderDrive(DRIVE_SPEED, -46, -46, 8);
+            encoderDrive(DRIVE_SPEED, -54, -54, 8);
+
+            rotate(-68, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 7, 7, 5.0);
+//            rotate(10, TURN_SPEED);
+            encoderDrive(0.3, -2, -2, 5.0);
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            rotate(-110, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED, 4, 4, 5.0);
-            rotate(10, TURN_SPEED);
-            encoderDrive(0.3, 2, 2, 5.0);
             rotate(-40, TURN_SPEED);
-            encoderDrive(0.3, 4, 4, 5.0);  //
-            robot.leftIntake.setPower(0.8);//intake
-            robot.rightIntake.setPower(-0.8);
-            encoderDrive(DRIVE_SPEED, 7, 7, 4); // org 14, drives toward 2nd stone and wall
-            rotate(24, TURN_SPEED);
-            encoderDrive(0.3, -4, -4, 4);
+            encoderDrive(0.3, 7, 7, 5.0);  //
+//            robot.leftIntake.setPower(0.8);//intake
+//            robot.rightIntake.setPower(-0.8);
+            encoderDrive(DRIVE_SPEED, -9, -9, 4); // org 14, drives toward 2nd stone and wall
+//            rotate(24, TURN_SPEED);
+//            encoderDrive(0.3, -4, -4, 4);
+            rotate(130, TURN_SPEED);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(74, TURN_SPEED);
+
             encoderDrive(DRIVE_SPEED, 42, 42, 4);
-            rotate(40, TURN_SPEED);
+            rotate(-40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            rotate(-40, TURN_SPEED);
+            rotate(40, TURN_SPEED);
             encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
 
         }

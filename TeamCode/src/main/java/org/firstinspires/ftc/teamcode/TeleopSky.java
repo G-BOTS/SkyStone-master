@@ -143,11 +143,6 @@ public class TeleopSky extends OpMode {
             robot.right_hand.setPosition(0.2);
         }
 
-
-
-
-
-
         if (gamepad1.right_trigger > 0.1) { // Trigger controls the main speed of the elevators speed
             robot.leftElv.setPower(-0.95);
             robot.rightElv.setPower(-0.95);
@@ -158,6 +153,7 @@ public class TeleopSky extends OpMode {
             robot.leftElv.setPower(0.0);
             robot.rightElv.setPower(0.0);
         }
+
         if (gamepad2.right_bumper) {
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
@@ -168,6 +164,7 @@ public class TeleopSky extends OpMode {
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
         }
+
         if (gamepad2.right_trigger > 0.1) {
             robot.horiElv.setPower(0.6);
         } else if (gamepad2.left_trigger > 0.1) {
@@ -175,12 +172,14 @@ public class TeleopSky extends OpMode {
         } else {
             robot.horiElv.setPower(0.0);
         }
+
         if (gamepad2.a) {
-            robot.pickup.setPosition(0.25);
+            robot.pickup.setPosition(0.3);//.25
         } else if (gamepad2.b) {
             robot.pickup.setPosition(0.7);
 
         }
+
         if (gamepad2.x) {
             robot.capstone.setPosition(0.92);
         } else {

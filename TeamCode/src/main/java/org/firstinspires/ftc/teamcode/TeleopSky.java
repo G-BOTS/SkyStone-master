@@ -83,6 +83,10 @@ public class TeleopSky extends OpMode {
         robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        robot.rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        robot.leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     /*
@@ -166,15 +170,15 @@ public class TeleopSky extends OpMode {
         }
 
         if (gamepad2.right_trigger > 0.1) {
-            robot.horiElv.setPower(0.6);
+            robot.horiElv.setPower(0.95);
         } else if (gamepad2.left_trigger > 0.1) {
-            robot.horiElv.setPower(-0.6);
+            robot.horiElv.setPower(-0.8);
         } else {
             robot.horiElv.setPower(0.0);
         }
 
         if (gamepad2.a) {
-            robot.pickup.setPosition(0.3);//.25
+            robot.pickup.setPosition(0.28);//.25
         } else if (gamepad2.b) {
             robot.pickup.setPosition(0.7);
 

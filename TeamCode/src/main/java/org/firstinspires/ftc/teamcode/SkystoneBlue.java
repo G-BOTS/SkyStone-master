@@ -201,8 +201,8 @@ public class SkystoneBlue extends LinearOpMode {
         if (indicator == 1) {
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(0.3, 7, 7, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+            encoderDrive(0.3, 8, 8, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+            encoderDrive(DRIVE_SPEED, -11, -11, 8.0);  // S1:  24 Drive forward 4 Sec timeout
             rotate(67, TURN_SPEED);
             robot.leftIntake.setPower(-0.0);
             robot.rightIntake.setPower(0.0);

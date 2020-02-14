@@ -203,30 +203,34 @@ public class SkystoneBlue extends LinearOpMode {
             robot.rightIntake.setPower(-0.8);
             encoderDrive(0.3, 8, 8, 5.0);  // S1:  24 Drive forward 4 Sec timeout
             encoderDrive(DRIVE_SPEED, -11, -11, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(67, TURN_SPEED);
+            rotate(69, TURN_SPEED);
             robot.leftIntake.setPower(-0.0);
             robot.rightIntake.setPower(0.0);
             encoderDrive(DRIVE_SPEED, 30, 30, 4);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            encoderDrive(DRIVE_SPEED, -40, -40, 8.0);
+            encoderDrive(DRIVE_SPEED, -38, -38, 8.0);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(-110, TURN_SPEED);
+            rotate(-68, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 10, 10, 4.0);
+            encoderDrive(DRIVE_SPEED, -3, -3, 4.0);
+            rotate(-30, TURN_SPEED);
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(DRIVE_SPEED, 11, 11, 4); // org 14, drives toward 2nd stone and wall
-            rotate(24, TURN_SPEED);
-            encoderDrive(0.3, -7, -7, 4);
+            encoderDrive(DRIVE_SPEED, 7, 7, 4.0);
+            encoderDrive(DRIVE_SPEED, -14, -14, 4); // org 14, drives toward 2nd stone and wall
+//            rotate(30, TURN_SPEED);
+//            encoderDrive(0.3, -7, -7, 4);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(76, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED, 44, 44, 8);
+            rotate(112, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 40, 40, 8);
             rotate(-40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
             rotate(40, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
+            encoderDrive(DRIVE_SPEED, -14, -14, 8.0);
 //        rotate(-66,TURN_SPEED);
 //        rotate(-66,TURN_SPEED);
 //        encoderDrive(DRIVE_SPEED,-12,-12,4.0);
@@ -235,36 +239,48 @@ public class SkystoneBlue extends LinearOpMode {
         }
         if (indicator == 2) {
 
-            encoderDrive(0.3, 2, 2, 5.0);
-            rotate(10,TURN_SPEED);
             robot.leftIntake.setPower(0.8);
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(0.3, 2, 2, 5.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(-10,TURN_SPEED);
-            encoderDrive(DRIVE_SPEED, -10, -10, 8.0);  // S1:  24 Drive forward 4 Sec timeout
-            rotate(118, TURN_SPEED);
+//            rotate(-14,TURN_SPEED);
+            encoderDrive(0.3,2,2,5);
+//            robot.left_hand.setPosition(0.31);
+//            robot.right_hand.setPosition(0.74);
+//            encoderDrive(0.3, -4, -4, 5.0);
+//            robot.left_hand.setPosition(0.8);
+//            robot.right_hand.setPosition(0.2);
+
+            encoderDrive(DRIVE_SPEED,-6,-6,5);
+            rotate(95,TURN_SPEED);
+//            encoderDrive(0.3, 3, 3, 5.0);  // S1:  24 Drive forward 4 Sec timeout
+//            rotate(40,TURN_SPEED);
+//            encoderDrive(DRIVE_SPEED, -11, -11, 8.0);  // S1:  24 Drive forward 4 Sec timeout
+//            rotate(94, TURN_SPEED);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
             encoderDrive(DRIVE_SPEED, 30, 30, 8);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            encoderDrive(DRIVE_SPEED, -50, -50, 8);
+            sleep(250);
+            encoderDrive(DRIVE_SPEED, -46, -46, 8);
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(-110, TURN_SPEED);
+            rotate(-68, TURN_SPEED);
+            encoderDrive(0.3, 8,8, 4); // org 14, drives toward 2nd stone and wall
+            encoderDrive(DRIVE_SPEED, -3, -3, 4); // org 14, drives toward 2nd stone and wall
+            rotate(-40, TURN_SPEED);
             robot.leftIntake.setPower(0.8);//intake
             robot.rightIntake.setPower(-0.8);
-            encoderDrive(DRIVE_SPEED, 7, 7, 4); // org 14, drives toward 2nd stone and wall
-            rotate(24, TURN_SPEED);
-            encoderDrive(0.3, -4, -4, 4);
+            encoderDrive(0.3, 6, 6, 4);
+            rotate(30, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, -7, -7, 4); // org 14, drives toward 2nd stone and wall
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
-            rotate(74, TURN_SPEED);
-            encoderDrive(DRIVE_SPEED, 60, 60, 4);
-            rotate(40, TURN_SPEED);
+            rotate(72, TURN_SPEED);
+            encoderDrive(DRIVE_SPEED, 48, 48, 4);
+            rotate(-40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);
-            rotate(-40, TURN_SPEED);
+            rotate(40, TURN_SPEED);
             encoderDrive(DRIVE_SPEED, -10, -10, 8.0);
 
         }
@@ -307,7 +323,7 @@ public class SkystoneBlue extends LinearOpMode {
             robot.leftIntake.setPower(0.0);
             robot.rightIntake.setPower(0.0);
 
-            encoderDrive(DRIVE_SPEED, 42, 42, 4);
+            encoderDrive(DRIVE_SPEED, 46, 46, 4);
             rotate(-40, TURN_SPEED);
             robot.leftIntake.setPower(-0.8);//outake
             robot.rightIntake.setPower(0.8);

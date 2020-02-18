@@ -93,7 +93,7 @@ public class HardwareSky {
         rightIntake = hwMap.get(DcMotor.class, "right_intake");
 
        sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
-//        sensorColorleft = hwMap.get(ColorSensor.class,sensor_color_left);
+       sensorColorleft = hwMap.get(ColorSensor.class,"sensor_color_left");
 //
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors

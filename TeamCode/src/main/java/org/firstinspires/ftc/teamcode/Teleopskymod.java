@@ -78,11 +78,14 @@ public class Teleopskymod extends OpMode {
         // Send telemetry message to signify robot waiting;
         robot.rightElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.horiElv.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         telemetry.addData("Say", "Hello Driver");//
         robot.rightElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.horiElv.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.leftElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.horiElv.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     /*

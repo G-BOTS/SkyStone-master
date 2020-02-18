@@ -117,6 +117,7 @@ public class TeleopSky extends OpMode {
         double right;
         int leftElvEnc;
         int rightElvEnc;
+        int horElvEnc;
         double target_leftE;
         double target_rightE;
         double Elspeed;
@@ -193,9 +194,10 @@ public class TeleopSky extends OpMode {
 
         leftElvEnc = robot.leftElv.getCurrentPosition();
         rightElvEnc = robot.rightElv.getCurrentPosition();
+        horElvEnc=robot.horiElv.getCurrentPosition();
         telemetry.addData("Left Elevator:", leftElvEnc);
         telemetry.addData("Right Elevator:", rightElvEnc);
-
+        telemetry.addData("Horsontal Elevator",horElvEnc);
     }
     // Use gamepad left & right Bumpers to open and close the claw
         /*if (gamepad1.right_bumper)

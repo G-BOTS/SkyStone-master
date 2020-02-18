@@ -60,7 +60,7 @@ public class SkystoneRed extends LinearOpMode {
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
-        sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
+        sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_left");
 
         //digitalTouch = HardwareSky.get(DigitalChannel.class, "sensor_digital");
 
@@ -160,7 +160,7 @@ public class SkystoneRed extends LinearOpMode {
 
         encoderDrive(DRIVE_SPEED, 19, 19, 5.0);  // S1:  24 Drive forward 4 Sec timeout
 
- /*       HueValue = 0;
+        HueValue = 0;
         aveHue = 0;
         for (counter = 0; counter < 10; counter++) {
             Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
@@ -168,16 +168,18 @@ public class SkystoneRed extends LinearOpMode {
                     (int) (sensorColor.blue() * SCALE_FACTOR),
                     hsvValues);
             HueValue = HueValue + hsvValues[0];
+            telemetry.addData("Hue",HueValue);
+            telemetry.update();
         }
         aveHue = (HueValue / 10);
-        if (aveHue > 80) {
+        if (aveHue > 110) {
             indicator = 1;
 
-        } else { */
+        } else {
             encoderDrive(DRIVE_SPEED, -4, -4, 5.0);
             rotate(14, TURN_SPEED);
             encoderDrive(DRIVE_SPEED, 6, 6, 5);
-/*
+
             HueValue = 0;
             aveHue = 0;
             for (counter = 0; counter < 10; counter++) {
@@ -189,12 +191,13 @@ public class SkystoneRed extends LinearOpMode {
             }
 
             aveHue = (HueValue / 10);
-            if (aveHue > 80) {
+            if (aveHue > 110) {
                 indicator = 2;
             } else {
                 indicator = 3;
             }
-        } */
+        }
+        telemetry.addData("Hue",HueValue);
         telemetry.addData("ind", indicator);
         telemetry.update();
         if (indicator == 1) {
@@ -249,7 +252,7 @@ public class SkystoneRed extends LinearOpMode {
 //            robot.right_hand.setPosition(0.2);
 
             encoderDrive(DRIVE_SPEED,-6,-6,5);
-            rotate(-78,TURN_SPEED);
+            rotate(-90,TURN_SPEED);
 //            encoderDrive(0.3, 3, 3, 5.0);  // S1:  24 Drive forward 4 Sec timeout
 //            rotate(40,TURN_SPEED);
 //            encoderDrive(DRIVE_SPEED, -11, -11, 8.0);  // S1:  24 Drive forward 4 Sec timeout
